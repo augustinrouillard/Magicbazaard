@@ -1,0 +1,10 @@
+<h1>Reservation#edit</h1>
+<p>Find me in app/views/reservation/edit.html.erb</p>
+
+<%= simple_form_for(restaurant) do |f| %>
+  <%= f.input :starting_date %>
+  <%= f.input :ending_date %>
+  <%= f.submit %>
+<% end %>
+
+<%= link_to("Home Page", items_path) %>
