@@ -1,4 +1,4 @@
 class Reservation < ApplicationRecord
   belongs_to :user
-  belongs_to :object
+  belongs_to :item
 end

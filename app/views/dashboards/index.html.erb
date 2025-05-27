@@ -1,0 +1,13 @@
+<h1>Dashboards#index</h1>
+<div class="container">
+      <% @reservations.each do |reservation| %>
+        <ul>
+          <li><%= reservation.item.name %></li>
+          <li><%= reservation.starting_date %></li>
+          <li><%= reservation.ending_date %></li>
+          <li><%= link_to 'Modifier', edit_reservation_path(reservation) %></li>
+        </ul>
+      <% end %>
+      <%= link_to 'Back to items', items_path %>
+      
+</div>
