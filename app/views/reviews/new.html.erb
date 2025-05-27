@@ -1,12 +1,11 @@
-<h1>Laisser un avis pour <%= @item.name %></h1>
+<h1>Add a review for <%= @item.name %></h1>
 
 <%= simple_form_for [@item, @review] do |f| %>
-  <%= f.input :content, as: :text, label: "Commentaire" %>
+  <%= f.input :content, as: :text, label: "Comment" %>
 
   <div class="actions">
-    <%= f.button :submit, "Envoyer mon avis" %>
+    <%= f.button :submit, "Submit my review" %>
   </div>
 <% end %>
 
-<%= link_to "← Retour à l'objet", item_path(@item) %>
-
+<%= link_to "← Back to item", item_path(@item) %>

@@ -18,9 +18,13 @@ class ReviewsController < ApplicationController
   end  
 
   def destroy
-    @review = Review.find(params[:id])
-    @review.destroy
-    redirect_to items_path, status: :see_other
+      @review = Review.find(params[:id])
+    if @review.user == current_user
+      @review.destroy
+      redirect_to item_path, status: :see_other
+    else
+      redirect_to item_path, alert: "Not authorized."
+    end
   end
 
   private

@@ -12,7 +12,7 @@ class ReservationsController < ApplicationController
     @reservation.item = @item
     @reservation.user = current_user
     if @reservation.save
-      redirect_to root_path, notice: "Réservation confirmée."
+      redirect_to dashboards_path, notice: "Réservation confirmée."
     else
       render :new, status: :unprocessable_entity
     end
@@ -29,7 +29,7 @@ class ReservationsController < ApplicationController
     @reservation.item = @item
     @reservation.user = current_user
     if @reservation.update(reservation_params)
-      redirect_to user_dashboards_path(current_user), notice: "Réservation mise à jour."
+      redirect_to dashboards_path, notice: "Réservation mise à jour."
     else
       render :edit, status: :unprocessable_entity
     end
