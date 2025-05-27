@@ -1,0 +1,16 @@
+<h1>Reservation#edit</h1>
+<div class="container">
+  <h2>Modifier la réservation de : <%= @item.name %></h2>
+  <%= simple_form_for(@reservation) do |f| %>
+    <%= f.input :starting_date,
+                as: :string,
+                input_html: { data: { controller: "datepicker" } } %>
+    <%= f.input :ending_date,
+                as: :string,
+                input_html: { data: { controller: "datepicker" } } %>
+    <%= f.hidden_field :item_id, value: @item.id %>
+    <%= f.submit "Modifier la réservation" %>
+  <% end %>
+  <%= link_to 'Back to items', items_path %>
+  <%= link_to 'Dashboard', user_dashboards_path(current_user) %>
+</div>

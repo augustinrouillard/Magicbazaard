@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'dashboards/index'
+  get 'reservation/new'
+  get 'reservation/create'
+  get 'reservation/edit'
+  get 'reservation/update'
   devise_for :users
   #root to: "items#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -10,9 +15,9 @@ Rails.application.routes.draw do
   #Defines the root path route ("/")
   #root "posts#index"
 
+  resources :dashboards, only: [:index]
 
   get "/user/:id", to: "pages#profile", as: :profile
-
 
   resources :items do
     resources :reservations, only: [:new]
@@ -20,7 +25,7 @@ Rails.application.routes.draw do
   end
   resources :reservations, only: [:create, :edit, :update]
   resources :reviews, only: [:destroy]
-  resources :comments, only: [:create, :destroy]
 
+  resources :comments, only: [:create, :destroy]
 
 end
