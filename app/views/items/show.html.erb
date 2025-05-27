@@ -1,0 +1,21 @@
+
+
+<h1><%=@item.name%></h1>
+
+<% if @item.image.attached? %>
+  <%= cl_image_tag @item.image.key, height: 300, width: 400, crop: :fill %>
+<% end %>
+
+
+
+<p>Price: <%= number_to_currency(@item.price) %></p>
+<p>Description: <%= @item.description %></p>
+<p>Power: <%= @item.power %></p>
+<p>Category: <%= @item.category %></p>
+
+
+<%= link_to "Edit item",edit_item_path(@item), class: "btn btn-secondary"%>
+<%= link_to 'Back to items', root_path, class: "btn btn-secondary" %>
+<%= link_to "Delete",item_path(@item),
+  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger"
+%>
