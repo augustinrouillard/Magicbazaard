@@ -1,0 +1,18 @@
+
+
+<h1><%=@item.name%></h1>
+afficher image_url avec helper image_tag
+<%= image_tag @item.image if @item.image.attached? %>
+
+
+<p>Price: <%= number_to_currency(@item.price) %></p>
+<p>Description: <%= @item.description %></p>
+<p>Power: <%= @item.power %></p>
+<p>Category: <%= @item.category %></p>
+
+
+<%= link_to "Edit item",edit_item_path(@item), class: "btn btn-secondary"%>
+<%= link_to 'Back to items', root_path, class: "btn btn-secondary" %>
+<%= link_to "Delete",item_path(@item),
+  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger"
+%>
