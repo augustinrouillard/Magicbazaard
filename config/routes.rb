@@ -10,9 +10,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  resources :user, only: [:show] do
-    resources :comments, only: [:new]
-  end
+
+  get "/user/:id", to: "pages#profile", as: :profile
 
 
   resources :items do
