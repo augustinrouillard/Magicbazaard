@@ -5,7 +5,7 @@ class PagesController < ApplicationController
   end
 
   def profile
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
     @comment = Comment.new
     @comments = Comment.where(target_id: @user.id)
   end
