@@ -7,3 +7,35 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+User.destroy_all
+user_1 = User.create!(
+  name: "Harry",
+  phone_number: "0123456789",
+  address: "4 Privet Drive, Little Whinging, Surrey",
+  email: "harry@gmail.com",
+  password: "password123"
+)
+Item.destroy_all
+baguette_de_sureau = Item.create!(
+    name:    "Baguette de sureau",
+    description: "Blablablablablablabla",
+    category: "Wand",
+    rating: 4.5,
+    power: 1000,
+    user_id: 1
+  )
+ baguette_de_scorpion = Item.create!(
+    name:    "Baguette de scorpion",
+    description: "Blablablablablablabla",
+    category: "Wand",
+    rating: 4.5,
+    power: 1000,
+    user_id: 1
+  )
+
+
+
+
+
+

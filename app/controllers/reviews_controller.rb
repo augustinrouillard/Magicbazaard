@@ -19,12 +19,8 @@ class ReviewsController < ApplicationController
 
     def destroy
         @review = Review.find(params[:id])
-     if @review.user == current_user
         @review.destroy
-     redirect_to item_path(@review.item)
-     else  
-      render :new, status: :unprocessable_entity
-     end
+        redirect_to items_path, status: :see_other
     end
 
 
