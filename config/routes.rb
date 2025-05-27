@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   #Defines the root path route ("/")
-  root "posts#index"
+  #root "posts#index"
 
   resources :user, only: [:show] do
     resources :comments, only: [:new]
@@ -17,10 +17,10 @@ Rails.application.routes.draw do
 
   resources :items do
     resources :reservations, only: [:new]
-    resources :reviews, only: [:new]
+    resources :reviews, only: [:new, :create]
   end
   resources :reservations, only: [:create, :edit, :update]
-  resources :reviews, only: [:create, :destroy]
+  resources :reviews, only: [:destroy]
   resources :comments, only: [:create, :destroy]
 
 
