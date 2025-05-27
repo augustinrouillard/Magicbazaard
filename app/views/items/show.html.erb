@@ -1,21 +1,88 @@
+<main class="container">
+    <section class="item-header">
+      <h1><%=@item.name%></h1>
+      <div class="meta">
+        <span>⭐ <%=@item.rating%></span>
+        <a href="#">item.review</a>
+        <%# <span>🥇 Supervendeur · <a href="#">Bordeaux, France</a></span> %>
+      </div>
+    </section>
 
 
-<h1><%=@item.name%></h1>
-
-<% if @item.image.attached? %>
-  <%= cl_image_tag @item.image.key, height: 300, width: 400, crop: :fill %>
-<% end %>
 
 
+    <%# <div class="gallery row">
+      <div class="col-6">
+      <%= cl_image_tag @item.image.key, class: "main-image object-fit-cover w-100" %>
+      <%# </div> %>
+      <%# <div class="main-image"><img src="nimbus-main.jpg" alt="nimbus" /></div> %>
+      <%# <div class="thumbnails col-5"> %>
+        <%# <%= cl_image_tag @item.image.key %>
+        <%# <%= cl_image_tag @item.image.key %>
+        <%# <%= cl_image_tag @item.image.key %>
+        <%# <%= cl_image_tag @item.image.key %>
+      <%# </div> %>
+    <%# </div> %>
 
-<p>Price: <%= number_to_currency(@item.price) %></p>
-<p>Description: <%= @item.description %></p>
-<p>Power: <%= @item.power %></p>
-<p>Category: <%= @item.category %></p>
 
 
-<%= link_to "Edit item",edit_item_path(@item), class: "btn btn-secondary"%>
+
+    <div class="gallery">
+      <div class="">
+      <%= cl_image_tag @item.image.key, class: "main-image object-fit-cover w-100" %>
+      </div>
+      <%# <div class="main-image"><img src="nimbus-main.jpg" alt="nimbus" /></div> %>
+      <div class="thumbnails col-5">
+        <%= cl_image_tag @item.image.key, class: ""  %>
+        <%= cl_image_tag @item.image.key, class: "" %>
+        <%= cl_image_tag @item.image.key, class: "" %>
+        <%= cl_image_tag @item.image.key, class: "" %>
+      </div>
+    </div>
+    </main>
+
+<div class="container2">
+    <section class="item-info">
+      <h2><%=@item.description%></h2>
+      <p>1 place · Poils de chameaux · bois de chêne · 0–75 KM</p>
+
+      <div class="info-box">ℹ️ Moins cher qu’un gros SUV diesel</div>
+      <div class="info-box">✨ Peut aussi servir à enlever la poussière</div>
+
+      <div class="description">
+        <h3>Description</h3>
+        <p>Voir plus</p>
+      </div>
+    </section>
+
+    <aside class="booking">
+      <div class="price">75€ / jour</div>
+      <span>⭐ 3.7 · <a href="#">7 commentaires</a></span>
+
+      <form>
+        <label>À partir du</label>
+        <input type="date" />
+        <label>Jusqu'au</label>
+        <input type="date" />
+        <button>Réserver</button>
+      </form>
+
+      <div class="summary">
+        <p>79€ × 7 jours — 555€</p>
+        <p>Promotion — -28€</p>
+        <p><strong>Total : 701€</strong></p>
+        <small>Vous ne serez pas débité maintenant</small>
+      </div>
+    </aside>
+    <%= link_to "Edit item",edit_item_path(@item), class: "btn btn-secondary"%>
 <%= link_to 'Back to items', root_path, class: "btn btn-secondary" %>
 <%= link_to "Delete",item_path(@item),
   data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger"
 %>
+
+  </div>
+
+
+<%# <% if @item.image.attached? %>
+  <%# <%= cl_image_tag @item.image.key, height: 300, width: 400, crop: :fill %>
+<%# <% end %>
