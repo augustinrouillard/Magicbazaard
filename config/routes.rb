@@ -10,9 +10,10 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-
-  get "/user/:id", to: "pages#profile", as: :profile
-
+  resources :users do
+    get "/profile", to: "pages#profile", as: :profile
+    post "/profile", to: "comments#create", as: :comments
+  end
 
   resources :items do
     resources :reservations, only: [:new]
@@ -21,6 +22,4 @@ Rails.application.routes.draw do
   resources :reservations, only: [:create, :edit, :update]
   resources :reviews, only: [:create, :destroy]
   resources :comments, only: [:create, :destroy]
-
-
 end
