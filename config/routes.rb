@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'reservation/edit'
   get 'reservation/update'
   devise_for :users
+  root to: "items#index"
   #root to: "items#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -20,7 +21,7 @@ Rails.application.routes.draw do
   get "/user/:id", to: "pages#profile", as: :profile
 
   resources :items do
-    resources :reservations, only: [:new]
+    resources :reservations, only: [:new, :create]
     resources :reviews, only: [:new, :create]
   end
   resources :reservations, only: [:create, :edit, :update]
