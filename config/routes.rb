@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'ratings/create'
   get 'dashboards/index'
   get 'reservation/new'
   get 'reservation/create'
@@ -27,6 +28,7 @@ Rails.application.routes.draw do
   resources :items do
     resources :reservations, only: [:new, :create]
     resources :reviews, only: [:new, :create]
+    resources :ratings, only: [:create]
   end
   resources :reservations, only: [:create, :edit, :update]
 

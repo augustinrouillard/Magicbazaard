@@ -9,5 +9,10 @@ class Item < ApplicationRecord
   belongs_to :user
   has_many :reviews, dependent: :destroy
   has_many :reservations, dependent: :destroy
+  has_many :ratings, dependent: :destroy
 
+  def average_rating
+    return 0 if ratings.empty?
+    ratings.average(:score).round(1)
+  end
 end

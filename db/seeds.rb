@@ -50,9 +50,3 @@ baguette_de_sureau = Item.create!(
     )
 
 
-
-
-
-
-
-
