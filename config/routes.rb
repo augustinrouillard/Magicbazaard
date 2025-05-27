@@ -15,18 +15,23 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   #Defines the root path route ("/")
-  #root "posts#index"
+  root "items#index"
 
+
+  resources :users do
+    get "/profile", to: "pages#profile", as: :profile
+    post "/profile", to: "comments#create", as: :comments
+  end
+  
   resources :dashboards, only: [:index]
-
-  get "/user/:id", to: "pages#profile", as: :profile
-
+  
   resources :items do
     resources :reservations, only: [:new, :create]
     resources :reviews, only: [:new, :create]
     resources :ratings, only: [:create]
   end
   resources :reservations, only: [:create, :edit, :update]
+
   resources :reviews, only: [:destroy]
 
   resources :comments, only: [:create, :destroy]

@@ -7,13 +7,20 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-
 User.destroy_all
 user_1 = User.create!(
   name: "Harry",
   phone_number: "0123456789",
   address: "4 Privet Drive, Little Whinging, Surrey",
   email: "harry@gmail.com",
+  password: "password123"
+)
+
+user_2 = User.create!(
+  name: "Hermione",
+  phone_number: "0987654321",
+  address: "12 Grimmauld Place, London",
+  email: "hermione@gmail.com",
   password: "password123"
 )
 
@@ -34,3 +41,12 @@ baguette_de_sureau = Item.create!(
     power: 1000,
     user_id: 1
   )
+
+  Comment.destroy_all
+  Comment.create!(
+    content: "C'est une baguette magnifique !",
+    author_id: user_1.id,
+    target_id: user_2.id
+    )
+
+
