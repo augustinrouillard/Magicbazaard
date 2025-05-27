@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'dashboards/index'
+  get 'reservation/new'
+  get 'reservation/create'
+  get 'reservation/edit'
+  get 'reservation/update'
   devise_for :users
   root to: "items#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -12,16 +17,15 @@ Rails.application.routes.draw do
 
   resources :user, only: [:show] do
     resources :comments, only: [:new]
+    resources :dashboards, only: [:index]
   end
-
 
   resources :items do
-    resources :reservations, only: [:new]
+    resources :reservations, only: [:new, :create]
     resources :reviews, only: [:new]
   end
-  resources :reservations, only: [:create, :edit, :update]
+  resources :reservations, only: [:edit, :update]
   resources :reviews, only: [:create, :destroy]
   resources :comments, only: [:create, :destroy]
-
 
 end
