@@ -16,6 +16,7 @@ user_1 = User.create!(
   email: "harry@gmail.com",
   password: "password123"
 )
+
 Item.destroy_all
 baguette_de_sureau = Item.create!(
     name:    "Baguette de sureau",
@@ -33,9 +34,3 @@ baguette_de_sureau = Item.create!(
     power: 1000,
     user_id: 1
   )
-
-
-
-
-
-
