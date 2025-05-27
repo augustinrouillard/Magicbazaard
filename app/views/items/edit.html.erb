@@ -4,6 +4,7 @@
   <%= f.input :description %>
   <%= f.select :power, Item::POWER %>
   <%= f.select :category, Item::CATEGORY %>
+  <%= f.input :image, as: :file, label: "Image of item" %>
   <%= f.submit %>
 <% end %>
 

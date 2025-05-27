@@ -1,9 +1,12 @@
 
 <%@items.each do |item| %>
     <h2 class="display-5"><%= link_to item.name, item_path(item), class: "text-decoration-none" %></h2>
-    <%# <%= link_to "Delete",restaurant_path(restaurant),
-  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "text-decoration-none"
-%>
+<% if item.image.attached? %>
+  <%= cl_image_tag item.image.key, height: 300, width: 400, crop: :fill %>
+<% end %>
+
 <% end %>
 
 <%= link_to "Add New Item",new_item_path, class: "btn btn-secondary"%>
+<%# <%= link_to "Dashboard", user_dashboards_path(current_user) %>
+<%# <%= link_to "Réserver", new_item_reservation_path(@item) %>

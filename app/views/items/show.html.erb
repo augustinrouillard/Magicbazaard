@@ -1,8 +1,11 @@
 
 
 <h1><%=@item.name%></h1>
-afficher image_url avec helper image_tag
-<%= image_tag @item.image if @item.image.attached? %>
+
+<% if @item.image.attached? %>
+  <%= cl_image_tag @item.image.key, height: 300, width: 400, crop: :fill %>
+<% end %>
+
 
 
 <p>Price: <%= number_to_currency(@item.price) %></p>
