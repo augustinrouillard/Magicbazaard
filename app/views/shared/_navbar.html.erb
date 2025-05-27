@@ -1,25 +1,47 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
     <%= link_to "#", class: "navbar-brand" do %>
-      <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
+      <%= image_tag "white_logo.png", alt: "Description", class: "img-fluid" %>
     <% end %>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
+    <div class="search-bar">
+        <div class="search-item">
+          <label for="objet">Nom de l'objet</label>
+          <input type="text" id="objet" placeholder="Rechercher un objet">
+        </div>
+      <div class="search-item">
+          <label for="checkin">Quand ?</label>
+          <input type="date" id="checkin">
+      </div>
+      <div class="search-item">
+          <label for="departure">Quand ?</label>
+          <input type="date" id="departure">
+      </div>
+      <div class="search-item">
+          <label for="guests">Catégorie</label>
+          <input type="text" id="guests" placeholder="Ajoutez une catégorie...">
+      </div>
+      <button class="search-button">insérer l'icon</button>
+    </div>
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <li class="nav-item active">
-            <%= link_to "Home", "#", class: "nav-link" %>
+            <%= link_to "#", class: "nav-link" do %>
+              <%= image_tag "globe_icon.png", id: "globe-icon", alt: "Home" %>
+            <% end %>
           </li>
           <li class="nav-item">
-            <%= link_to "Messages", "#", class: "nav-link" %>
+            <%= link_to "Devient vendeur", "#", class: "nav-link" %>
           </li>
           <li class="nav-item dropdown">
           <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
+            <%= image_tag "user_avatar.png", class: "avatar", alt: "dropdown menu" %>
           </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%= link_to "Action", "#", class: "dropdown-item" %>
