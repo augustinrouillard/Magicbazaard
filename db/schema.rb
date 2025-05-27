@@ -75,7 +75,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_26_132954) do
 
   add_foreign_key "comments", "users", column: "author_id"
   add_foreign_key "comments", "users", column: "target_id"
-  add_foreign_key "items", "users"
+  add_foreign_key "items", "users", column: "user_id"
   add_foreign_key "reservations", "items"
   add_foreign_key "reservations", "users"
   add_foreign_key "reviews", "items"
