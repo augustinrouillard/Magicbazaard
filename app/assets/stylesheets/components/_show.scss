@@ -132,6 +132,18 @@ body {
   cursor: pointer;
 }
 
+.booking a {
+  background-color: #6f42c1;
+  color: white;
+  border: none;
+  padding: 0.7rem;
+  border-radius: 5px;
+  margin-top: 1rem;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+}
+
 .summary {
   margin-top: 1rem;
   font-size: 0.9rem;

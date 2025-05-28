@@ -2,8 +2,8 @@
     <section class="item-header">
       <h1><%=@item.name%></h1>
       <div class="meta">
-        <span>existing_rating.score⭐ <%=@item.rating%></span>
-        <a href="#">item.review</a>
+
+
         <%# <span>🥇 Supervendeur · <a href="#">Bordeaux, France</a></span> %>
       </div>
     </section>
@@ -77,7 +77,7 @@
     <section class="item-info">
       <h2><%=@item.description%></h2>
 
-      <div class="info-box"> 🪄 <%=@item.category.capitalize%> de niveau <%=@item.power%>  </div>
+      <div class="info-box"> 🪄 <%=@item.category.capitalize%> de <strong>niveau <%=@item.power%></strong>  </div>
       <% if @item.category == "chaudron" %>
       <div class="info-box">✨ Peut aussi servir à faire une excellente soupe aux orties (avec ou sans sortilèges).</div>
       <% elsif @item.category == "balais" %>
@@ -131,24 +131,30 @@
 
 
     <aside class="booking">
-      <div class="price"> <%=@item.price%> / jour</div>
-      <%# <span>⭐ <%= existing_rating.score %> ·
-      <a href="#">7 commentaires</a></span>
+      <div class="price"> <%=@item.price.round%> / jour</div>
+      <%# <span>⭐ <%= existing_rating.score %>
+      <%# <a href="#">7 commentaires</a></span> %>
+
+
 
       <form>
-        <label>À partir du</label>
-        <input type="date" />
-        <label>Jusqu'au</label>
-        <input type="date" />
-        <button><%= link_to "Réserver",new_item_reservation_path(@item), class: "text-decoration-none text-white"%></button>
+  <div class="form-group">
+    <label for="startDate">Date de début</label>
+    <input type="date" name="starting-date" class="form-control" id="startDate" name="start_date">
+  </div>
 
-      </form>
+  <div class="form-group">
+    <label for="endDate">Date de fin</label>
+    <input type="date" name="ending-date" class="form-control" id="endDate" name="end_date">
+  </div>
+
+  <%= link_to "Réserver",new_item_reservation_path(@item), class: ""%>
+</form>
+
 
       <div class="summary">
-        <p>79€ × 7 jours — 555€</p>
-        <p>Promotion — -28€</p>
-        <p><strong>Total : 701€</strong></p>
-        <small>Vous ne serez pas débité maintenant</small>
+
+
       </div>
     </aside>
 
