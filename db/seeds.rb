@@ -28,7 +28,7 @@ Item.destroy_all
 baguette_de_sureau = Item.create!(
     name:    "Baguette de sureau",
     description: "Blablablablablablabla",
-    category: "Wand",
+    category: "baguette",
     rating: 4.5,
     power: 1000,
     user_id: 1
@@ -36,7 +36,7 @@ baguette_de_sureau = Item.create!(
  baguette_de_scorpion = Item.create!(
     name:    "Baguette de scorpion",
     description: "Blablablablablablabla",
-    category: "Wand",
+    category: "baguette",
     rating: 4.5,
     power: 1000,
     user_id: 1
@@ -48,5 +48,3 @@ baguette_de_sureau = Item.create!(
     author_id: user_1.id,
     target_id: user_2.id
     )
-
-
