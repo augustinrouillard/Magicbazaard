@@ -21,8 +21,9 @@
     </div>
 
     <%= simple_form_for [@item, @reservation] do |f| %>
-      <%= f.hidden_field :starting_date, value: @starting_date %>
-      <%= f.hidden_field :ending_date, value: @ending_date %>
+      <p>Modifier les dates :</p>
+      <%= f.input :starting_date, as: :date, input_html: { value: @starting_date }, label: "Date de début" %>
+      <%= f.input :ending_date, as: :date, input_html: { value: @ending_date }, label: "Date de fin" %>
       <%= f.hidden_field :item_id, value: @item.id %>
       <%= f.submit "Valider la réservation", class: "btn-link" %>
     <% end %>
