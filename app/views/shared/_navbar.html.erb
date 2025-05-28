@@ -1,6 +1,7 @@
+
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
-    <%= link_to "#", class: "navbar-brand" do %>
+    <%= link_to items_path, class: "navbar-brand" do %>
       <%= image_tag "white_logo.png", alt: "Description", class: "img-fluid" %>
     <% end %>
 
@@ -25,7 +26,9 @@
           <label for="guests">Catégorie</label>
           <input type="text" id="guests" placeholder="Ajoutez une catégorie...">
       </div>
-      <button class="search-button">insérer l'icon</button>
+      <button class="search-button">
+        <%= image_tag "search_icone.png", id: "search-icon", alt: "search" %>
+      </button>
     </div>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -37,15 +40,14 @@
             <% end %>
           </li>
           <li class="nav-item">
-            <%= link_to "Devient vendeur", "#", class: "nav-link" %>
+            <%= link_to "Devient vendeur", new_item_path, class: "nav-link" %>
           </li>
           <li class="nav-item dropdown">
           <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <%= image_tag "user_avatar.png", class: "avatar", alt: "dropdown menu" %>
           </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Action", "#", class: "dropdown-item" %>
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
+              <%= link_to "Action", dashboards_path, class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
             </div>
           </li>
