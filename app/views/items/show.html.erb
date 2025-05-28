@@ -118,14 +118,14 @@
       <%# <span>⭐ <%= existing_rating.score %> ·
       <a href="#">7 commentaires</a></span>
 
-      <form>
+      <%= form_with url: new_item_reservation_path(@item), method: :get, local: true do %>
         <label>À partir du</label>
-        <input type="date" />
+        <input type="date" name="starting_date" required/>
         <label>Jusqu'au</label>
-        <input type="date" />
-        <button><%= link_to "Réserver",new_item_reservation_path(@item), class: "text-decoration-none text-white"%></button>
+        <input type="date" name="ending_date" required/>
+        <button type="submit" class="btn btn-primary">Réserver</button>
+      <% end %>
 
-      </form>
 
       <div class="summary">
         <p>79€ × 7 jours — 555€</p>
