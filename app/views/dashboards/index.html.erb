@@ -39,58 +39,89 @@
     </div>
 
     <!-- Réservations -->
+
+
     <div class="col-md-6">
       <!-- Passées -->
       <div class="mb-5">
-        <h2 class="fw-semibold mb-4">Mes réservations passées</h2>
-        <% if @reservations.past.any? %>
-          <ul class="list-group shadow-sm">
-            <% @reservations.past.order(ending_date: :desc).each do |reservation| %>
-              <li class="list-group-item">
+  <h2 class="fw-semibold mb-4">Mes réservations passées</h2>
+  <% if @reservations.past.any? %>
+    <div class="row g-4">
+      <% @reservations.past.order(starting_date: :asc).each do |reservation| %>
+        <% if reservation.item.image.attached? %>
+          <div class="col-md-6">
+            <div class="card shadow-sm rounded-5 overflow-hidden h-100">
+              <%= cl_image_tag reservation.item.image.key,
+                height: 200,
+                width: 1000,
+                class: "card-img-top object-fit-cover" %>
+              <div class="card-body">
                 <p class="mb-1"><strong>Item :</strong> <%= reservation.item.name %></p>
                 <small class="text-muted">Du <%= reservation.starting_date %> au <%= reservation.ending_date %></small>
-              </li>
-            <% end %>
-          </ul>
-        <% else %>
-          <p class="text-muted">Aucune réservation passée.</p>
+              </div>
+            </div>
+          </div>
         <% end %>
-      </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-muted">Aucune réservation passée.</p>
+  <% end %>
+</div>
 
       <!-- En cours -->
       <div class="mb-5">
-        <h2 class="fw-semibold mb-4">Mes réservations en cours</h2>
-        <% if @reservations.current.any? %>
-          <ul class="list-group shadow-sm">
-            <% @reservations.current.order(starting_date: :asc).each do |reservation| %>
-              <li class="list-group-item">
+  <h2 class="fw-semibold mb-4">Mes réservations en cours</h2>
+  <% if @reservations.current.any? %>
+    <div class="row g-4">
+      <% @reservations.current.order(starting_date: :asc).each do |reservation| %>
+        <% if reservation.item.image.attached? %>
+          <div class="col-md-6">
+            <div class="card shadow-sm rounded-5 overflow-hidden h-100">
+              <%= cl_image_tag reservation.item.image.key,
+                height: 200,
+                width: 1000,
+                class: "card-img-top object-fit-cover" %>
+              <div class="card-body">
                 <p class="mb-1"><strong>Item :</strong> <%= reservation.item.name %></p>
                 <small class="text-muted">Du <%= reservation.starting_date %> au <%= reservation.ending_date %></small>
-              </li>
-            <% end %>
-          </ul>
-        <% else %>
-          <p class="text-muted">Aucune réservation en cours.</p>
+              </div>
+            </div>
+          </div>
         <% end %>
-      </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-muted">Aucune réservation passée.</p>
+  <% end %>
+</div>
 
       <!-- Futures -->
-      <div class="mb-4">
-        <h2 class="fw-semibold mb-4">Mes réservations futures</h2>
-        <% if @reservations.upcoming.any? %>
-          <ul class="list-group shadow-sm">
-            <% @reservations.upcoming.order(starting_date: :asc).each do |reservation| %>
-              <li class="list-group-item">
+      <div class="mb-5">
+  <h2 class="fw-semibold mb-4">Mes réservations en cours</h2>
+  <% if @reservations.upcoming.any? %>
+    <div class="row g-4">
+      <% @reservations.upcoming.order(starting_date: :asc).each do |reservation| %>
+        <% if reservation.item.image.attached? %>
+          <div class="col-md-6">
+            <div class="card shadow-sm rounded-5 overflow-hidden h-100">
+              <%= cl_image_tag reservation.item.image.key,
+                height: 200,
+                width: 1000,
+                class: "card-img-top object-fit-cover" %>
+              <div class="card-body">
                 <p class="mb-1"><strong>Item :</strong> <%= reservation.item.name %></p>
                 <small class="text-muted">Du <%= reservation.starting_date %> au <%= reservation.ending_date %></small>
-              </li>
-              <%= link_to "Modifier", edit_reservation_path(reservation), class: "btn btn-secondary" %>
-            <% end %>
-          </ul>
-        <% else %>
-          <p class="text-muted">Aucune réservation future.</p>
+              </div>
+            </div>
+          </div>
         <% end %>
-      </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-muted">Aucune réservation passée.</p>
+  <% end %>
+</div>
     </div>
   </div>
 </div>
