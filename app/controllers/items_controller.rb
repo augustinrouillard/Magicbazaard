@@ -47,7 +47,7 @@ def destroy
 private
 
 def items_params
-  params.require(:item).permit(:name, :price, :description, :power, :category, :image)
+  params.require(:item).permit(:name, :price, :description, :power, :category, :image, :long_description)
 end
 
     # t.string "description"
