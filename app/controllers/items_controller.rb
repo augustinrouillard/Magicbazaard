@@ -26,9 +26,9 @@ end
 
 def edit
   @item = Item.find(params[:id])
-  if @item.user != current_user
-    redirect_to items_path, alert: 'You are not authorized to edit this item.'
-  end
+  # if @item.user != current_user
+  #   redirect_to item_path(@item), alert: 'You are not authorized to edit this item.'
+  # end
 end
 
 def update
