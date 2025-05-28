@@ -9,7 +9,7 @@ class PagesController < ApplicationController
     @comment = Comment.new
     @comments = Comment.where(target_id: @user.id)
     allrating = @comments.map(&:rating)
-    if allrating.count.zero?
+    if allrating.count.zero? || allrating.all?(&:nil?)
       @user.rating = 0
     else
       @user.rating = allrating.sum.to_f / allrating.size
