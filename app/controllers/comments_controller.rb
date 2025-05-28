@@ -4,11 +4,13 @@ class CommentsController < ApplicationController
     @user = User.find(params[:user_id])
     @comment.author = current_user
     @comment.target = @user
+    @comment.target != @comment.author
+    # je veux afficher le bouton du form profile.html.erb que si 
     if @comment.save
       redirect_to user_path(@user)
     else
       @comment = Comment.new
-      render :new, status: :unprocessable_entity
+      redirect_to user_profile_path(@user), alert: "Action non autorisée."
     end
   end
 
@@ -26,6 +28,6 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:content)
+    params.require(:comment).permit(:content, :rating)
   end
 end

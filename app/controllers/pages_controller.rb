@@ -8,5 +8,11 @@ class PagesController < ApplicationController
     @user = User.find(params[:user_id])
     @comment = Comment.new
     @comments = Comment.where(target_id: @user.id)
+    allrating = @comments.map(&:rating)
+    if allrating.count.zero?
+      @user.rating = 0
+    else
+      @user.rating = allrating.sum.to_f / allrating.size
+    end
   end
 end
