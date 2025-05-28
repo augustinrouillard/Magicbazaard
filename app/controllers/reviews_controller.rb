@@ -12,18 +12,18 @@ class ReviewsController < ApplicationController
 
     if @review.save
       redirect_to item_path(@review.item)
-    else  
+    else
       render :new, status: :unprocessable_entity
     end
-  end  
+  end
 
   def destroy
       @review = Review.find(params[:id])
     if @review.user == current_user
       @review.destroy
-      redirect_to item_path, status: :see_other
+      redirect_to item_path(@review.item), status: :see_other
     else
-      redirect_to item_path, alert: "Not authorized."
+      redirect_to item_path(@review.item), alert: "Not authorized."
     end
   end
 

@@ -4,6 +4,6 @@ class DashboardsController < ApplicationController
     @reservations = @user.reservations
     @items = @user.items
     @reviews = @user.reviews
-    @comments = @user.comments
+    @comments = Comment.where(author_id: current_user)
   end
 end
