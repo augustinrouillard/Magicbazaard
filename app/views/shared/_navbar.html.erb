@@ -1,57 +1,62 @@
-<div class="custom-navbar">
-  <div class="navbar-container">
-    <div class="logo">
-      <%= link_to items_path do %>
-        <%= image_tag "white_logo.png", alt: "Logo", class: "logo-img" %>
-      <% end %>
-    </div>
+
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+  <div class="container-fluid">
+    <%= link_to items_path, class: "navbar-brand" do %>
+      <%= image_tag "white_logo.png", alt: "Description", class: "img-fluid" %>
+    <% end %>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
     <div class="search-bar">
+        <div class="search-item">
+          <label for="objet">Nom de l'objet</label>
+          <input type="text" id="objet" placeholder="Rechercher un objet">
+        </div>
       <div class="search-item">
-        <label for="objet">Nom de l'objet</label>
-        <input type="text" id="objet" placeholder="Rechercher un objet">
+          <label for="checkin">Quand ?</label>
+          <input type="date" id="checkin">
       </div>
       <div class="search-item">
-        <label for="checkin">Quand ?</label>
-        <input type="date" id="checkin">
+          <label for="departure">Quand ?</label>
+          <input type="date" id="departure">
       </div>
       <div class="search-item">
-        <label for="departure">Quand ?</label>
-        <input type="date" id="departure">
-      </div>
-      <div class="search-item">
-        <label for="guests">Catégorie</label>
-        <input type="text" id="guests" placeholder="Ajoutez une catégorie...">
+          <label for="guests">Catégorie</label>
+          <input type="text" id="guests" placeholder="Ajoutez une catégorie...">
       </div>
       <button class="search-button">
-        <%= image_tag "search_icone.png", id: "search-icon", alt: "Search" %>
+        <%= image_tag "search_icone.png", id: "search-icon", alt: "search" %>
       </button>
     </div>
 
-    <ul class="nav-links">
-      <% if user_signed_in? %>
-        <li>
-          <%= link_to "#" do %>
-            <%= image_tag "globe_icon.png", id: "globe-icon", alt: "Home" %>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to "Devient vendeur", new_item_path %>
-        </li>
-        <li class="dropdown">
-          <%= link_to dashboards_path, class: "avatar-link" do %>
-            <%= image_tag "user_avatar.png", class: "avatar", alt: "Profil" %>
-          <% end %>
-          <div class="dropdown-menu">
-            <%= link_to "Mon dashboard", dashboards_path %>
-            <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete} %>
-          </div>
-        </li>
-      <% else %>
-        <li>
-          <%= link_to "Login", new_user_session_path %>
-        </li>
-      <% end %>
-    </ul>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto">
+        <% if user_signed_in? %>
+          <li class="nav-item active">
+            <%= link_to "#", class: "nav-link" do %>
+              <%= image_tag "globe_icon.png", id: "globe-icon", alt: "Home" %>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Devient vendeur", new_item_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item dropdown">
+          <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= image_tag "user_avatar.png", class: "avatar", alt: "dropdown menu" %>
+          </a>
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <%= link_to "Action", dashboards_path, class: "dropdown-item" %>
+              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+            </div>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   </div>
 </div>
