@@ -4,6 +4,12 @@ class ReservationsController < ApplicationController
     @item = Item.find(params[:item_id])
     @user = @item.user
     @reservations = Reservation.all
+    if params[:starting_date] && params[:ending_date]
+      @starting_date = Date.parse(params[:starting_date])
+      @ending_date = Date.parse(params[:ending_date])
+      @duration = (@ending_date - @starting_date).to_i
+      @total_price = @item.price * @duration
+    end
   end
 
   def create

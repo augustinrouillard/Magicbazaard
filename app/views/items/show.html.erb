@@ -2,7 +2,7 @@
     <section class="item-header">
       <h1><%=@item.name%></h1>
       <div class="meta">
-        <span>existing_rating.score⭐ <%=@item.rating%></span>
+        <span>⭐ <%=@item.rating%></span>
         <a href="#">item.review</a>
         <%# <span>🥇 Supervendeur · <a href="#">Bordeaux, France</a></span> %>
       </div>
@@ -27,8 +27,6 @@
 
 
 
-<%# RATING %>
-
 
 <div data-controller="toggle-form" style="max-width: 250px;">
   <% existing_rating = @item.ratings.find_by(user: current_user) %>
@@ -52,7 +50,7 @@
 
 <%# IMAGE GALLERY %>
 
-
+  <% if @item.image.attached? %>
     <div class="gallery">
       <div class="">
       <%= cl_image_tag @item.image.key, class: "main-image object-fit-cover w-100" %>
@@ -65,6 +63,7 @@
         <%= cl_image_tag @item.image.key, class: "" %>
       </div>
     </div>
+  <% end %>
     </main>
 
 
@@ -153,3 +152,4 @@
 <%# <% if @item.image.attached? %>
   <%# <%= cl_image_tag @item.image.key, height: 300, width: 400, crop: :fill %>
 <%# <% end %>
+
