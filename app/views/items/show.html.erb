@@ -97,7 +97,7 @@
     </section>
 
     <aside class="booking">
-      <div class="price"><%= @item.price.round %> $ /jour</div>
+      <div class="price"><%= @item.price.present? ? "#{@item.price.round} $ /jour" : "Prix non défini" %> </div>
       <%# <span>⭐ <%= existing_rating.score %>
       <%# <a href="#">7 commentaires</a></span> %>
 
