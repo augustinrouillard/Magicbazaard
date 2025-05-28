@@ -10,6 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
+
+
 ActiveRecord::Schema[7.1].define(version: 2025_05_28_123121) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +51,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_28_123121) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "rating"
     t.index ["author_id"], name: "index_comments_on_author_id"
     t.index ["target_id"], name: "index_comments_on_target_id"
   end
@@ -110,6 +114,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_28_123121) do
     t.string "name"
     t.string "phone_number"
     t.string "address"
+    t.float "rating"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
