@@ -2,9 +2,10 @@
   <%= f.input :name %>
   <%= f.input :price %>
   <%= f.input :description %>
-  <%= f.select :power, Item::POWER %>
-  <%= f.select :category, Item::CATEGORY %>
-  <%= f.input :image, as: :file, label: "Image of item" %>
+  <%= f.input :long_description %>
+  <%= f.select :power, Item::POWER, label: "Niveau de l'objet" %>
+  <%= f.select :category, Item::CATEGORY, label: "Catégorie de l'objet" %>
+  <%= f.input :image, as: :file, label: "Image de l'objet" %>
   <%= f.submit %>
 <% end %>
 
