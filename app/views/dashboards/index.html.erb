@@ -1,13 +1,100 @@
-<h1>Dashboards#index</h1>
-<div class="container">
-      <% @reservations.each do |reservation| %>
-        <ul>
-          <li><%= reservation.item.name %></li>
-          <li><%= reservation.starting_date %></li>
-          <li><%= reservation.ending_date %></li>
-          <li><%= link_to 'Modifier', edit_reservation_path(reservation) %></li>
+<%# Affiche le tableau de bord de l'utilisateur connecté %>
+<%# Le tableau de bord doit afficher les informations de l'utilisateur, ses commentaires, et ses réservations %>
+  <%# Affiche une card avec les informations de l'utilisateur actuel : nom, email, etc. %> OK
+  <%# Chaque commentaire doit indiquer l'auteur, le contenu, et la date %>
+  <%# Affiche les réservations passées : celles dont la date de fin est antérieure à aujourd'hui %>
+  <%# Affiche les réservations en cours : celles dont la date de début <= aujourd'hui <= date de fin %>
+  <%# Affiche les réservations futures : celles dont la date de début est après aujourd'hui %>
+  <%# Affiche tous les commentaires reçus par l'utilisateur connecté %>
+<div class="container my-4">
+  <!-- Carte utilisateur seule et centrée -->
+  <h1 class="text-center">À propos de moi</h1>
+  <div class="d-flex justify-content-center mb-5">
+    <div class="card" style="width: 22rem;">
+      <div class="card-body">
+        <h5 class="card-title"><%= @user.name %></h5>
+        <p class="card-text">
+          <strong>Email:</strong> <%= @user.email %><br>
+          <strong>Adresse:</strong> <%= @user.address %><br>
+          <strong>Téléphone:</strong> <%= @user.phone_number %><br>
+          <strong>Nombre de réservations:</strong> <%= @reservations.count %>
+        </p>
+        <%= link_to "Modifier mon profil", edit_user_registration_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ligne à deux colonnes : Commentaires / Réservations -->
+  <div class="row">
+    <!-- Colonne gauche : Commentaires -->
+    <div class="col-md-6">
+      <h2>Mes commentaires</h2>
+      <% if @comments.any? %>
+        <ul class="list-group">
+          <% @comments.order(created_at: :desc).each do |comment| %>
+            <li class="list-group-item">
+              <strong>Commentaire:</strong> <%= comment.content %><br>
+              <strong>Date:</strong> <%= comment.created_at.strftime("%d/%m/%Y") %>
+            </li>
+          <% end %>
         </ul>
+      <% else %>
+        <p>Aucun commentaire trouvé.</p>
       <% end %>
-      <%= link_to 'Back to items', items_path %>
-      
+    </div>
+
+    <!-- Colonne droite : Réservations -->
+    <div class="col-md-6">
+      <!-- Réservations passées -->
+      <div class="mb-4">
+        <h2>Mes réservations passées</h2>
+        <% if @reservations.past.any? %>
+          <ul class="list-group">
+            <% @reservations.past.order(ending_date: :desc).each do |reservation| %>
+              <li class="list-group-item">
+                <strong>Item:</strong> <%= reservation.item.name %><br>
+                Du <%= reservation.starting_date %> au <%= reservation.ending_date %>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p>Aucune réservation passée.</p>
+        <% end %>
+      </div>
+
+      <!-- Réservations en cours -->
+      <div class="mb-4">
+        <h2>Mes réservations en cours</h2>
+        <% if @reservations.current.any? %>
+          <ul class="list-group">
+            <% @reservations.current.order(starting_date: :asc).each do |reservation| %>
+              <li class="list-group-item">
+                <strong>Item:</strong> <%= reservation.item.name %><br>
+                Du <%= reservation.starting_date %> au <%= reservation.ending_date %>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p>Aucune réservation en cours.</p>
+        <% end %>
+      </div>
+
+      <!-- Réservations futures -->
+      <div>
+        <h2>Mes réservations futures</h2>
+        <% if @reservations.upcoming.any? %>
+          <ul class="list-group">
+            <% @reservations.upcoming.order(starting_date: :asc).each do |reservation| %>
+              <li class="list-group-item">
+                <strong>Item:</strong> <%= reservation.item.name %><br>
+                Du <%= reservation.starting_date %> au <%= reservation.ending_date %>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p>Aucune réservation future.</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
