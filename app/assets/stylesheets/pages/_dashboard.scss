@@ -1,0 +1,83 @@
+// Variables
+$primary-color: rgb(71, 52, 98);
+$primary-hover: darken($primary-color, 10%);
+$h1-color: rgb(34, 34, 34);
+$text-color: rgb(106, 106, 106);
+$secondary-text: rgb(108, 117, 125);
+$bg-light: rgb(248, 249, 250);
+$bg-light-hover: rgb(153, 132, 182);
+$card-radius: 1rem;
+$shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+// Global styles
+h1, h2{
+  color: $h1-color;
+}
+
+
+// User card
+.card {
+  border-radius: $card-radius;
+  box-shadow: $shadow;
+
+  .card-body {
+    .card-title {
+      font-weight: bold;
+    }
+
+    .card-text {
+      font-size: 0.95rem;
+
+      strong {
+        color: darken($text-color, 10%);
+      }
+
+      span {
+        color: $secondary-text;
+      }
+    }
+  }
+}
+
+// Comments & Reservations
+.list-group-item {
+  border: none;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+  background-color: $bg-light;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: $bg-light-hover;
+  }
+
+  strong {
+    color: darken($text-color, 10%);
+  }
+
+  small {
+    color: $secondary-text;
+  }
+}
+
+// Buttons
+.btn-primary {
+  background-color: $primary-color;
+  border: none;
+  border-radius: 0.5rem;
+
+  &:hover {
+    background-color: $primary-hover;
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  .card {
+    width: 100% !important;
+  }
+}
