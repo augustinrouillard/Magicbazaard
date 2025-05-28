@@ -4,8 +4,6 @@ class CommentsController < ApplicationController
     @user = User.find(params[:user_id])
     @comment.author = current_user
     @comment.target = @user
-    @comment.target != @comment.author
-    # je veux afficher le bouton du form profile.html.erb que si 
     if @comment.save
       redirect_to user_path(@user)
     else
