@@ -14,6 +14,7 @@ user_1 = User.create!(
   address: "4 Privet Drive, Little Whinging, Surrey",
   email: "harry@gmail.com",
   password: "password123"
+  image: "https://sm.ign.com/ign_fr/cover/h/harry-pott/harry-potter-the-series_eefu.jpg"
 )
 
 user_2 = User.create!(
@@ -22,6 +23,7 @@ user_2 = User.create!(
   address: "12 Grimmauld Place, London",
   email: "hermione@gmail.com",
   password: "password123"
+  image: "https://www.universharrypotter.com/galerie/albums/userpics/10001/9/hpfilmsedspersohermionegranger014.jpg"
 )
 
 Item.destroy_all
