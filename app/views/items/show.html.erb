@@ -64,6 +64,8 @@
         <div class="info-box">✨ Protège contre les malédictions… et les mauvais rencards.</div>
       <% elsif @item.category == "cape" %>
         <div class="info-box">✨ Peut aussi cacher une tenue douteuse en cas d'urgence fashion.</div>
+        <% else %>
+        <div class="info-box">✨ marche po</div>
       <% end %>
 
       <div class="description">
@@ -85,7 +87,7 @@
           <ul class="list-unstyled">
             <% total_rating = @item.reviews.sum(:rating) %>
             <% average_rating = total_rating / @item.reviews.count if @item.reviews.count > 0 %>
-            
+
 
             <% @item.reviews.each do |review| %>
               <h5 class="font-weight-bold">

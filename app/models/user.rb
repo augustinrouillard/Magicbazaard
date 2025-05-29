@@ -5,8 +5,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-         has_many :authored_comments, class_name: "Comment", foreign_key: "author_id"
-has_many :received_comments, class_name: "Comment", foreign_key: "target_id"
+        has_many :authored_comments, class_name: "Comment", foreign_key: "author_id"
+        has_many :received_comments, class_name: "Comment", foreign_key: "target_id"
 
 
          has_many :items, dependent: :destroy
