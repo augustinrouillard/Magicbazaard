@@ -1,4 +1,3 @@
-
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
     <%= link_to items_path, class: "navbar-brand" do %>
@@ -10,25 +9,17 @@
     </button>
 
     <div class="search-bar">
-        <div class="search-item">
-          <label for="objet">Nom de l'objet</label>
-          <input type="text" id="objet" placeholder="Rechercher un objet">
-        </div>
-      <div class="search-item">
-          <label for="checkin">Quand ?</label>
-          <input type="date" id="checkin">
-      </div>
-      <div class="search-item">
-          <label for="departure">Quand ?</label>
-          <input type="date" id="departure">
-      </div>
-      <div class="search-item">
-          <label for="guests">Catégorie</label>
-          <input type="text" id="guests" placeholder="Ajoutez une catégorie...">
-      </div>
-      <button class="search-button">
-        <%= image_tag "search_icone.png", id: "search-icon", alt: "search" %>
-      </button>
+      <%= form_with url: items_path, method: :get, class: "d-flex w-100 align-items-center gap-2" do %>
+        <%= text_field_tag :query, params[:query], class: "form-control flex-grow-1", placeholder: "Nom de l'objet" %>
+
+        <%= select_tag :category,
+            options_for_select(["bagette", "chaudron", "amulette", "balais", "cape"], params[:category]),
+            class: "form-select", prompt: "Catégorie" %>
+
+        <%= button_tag "Search", class: "btn btn-primary" do %>
+          <i class="fa-solid fa-magnifying-glass"></i>
+        <% end %>
+      <% end %>
     </div>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -36,19 +27,24 @@
         <% if user_signed_in? %>
           <li class="nav-item active">
             <%= link_to "#", class: "nav-link" do %>
-              <%= image_tag "globe_icon.png", id: "globe-icon", alt: "Home" %>
             <% end %>
           </li>
-          <li class="nav-item">
-            <%= link_to "Devient vendeur", new_item_path, class: "nav-link" %>
+          <li class="nav-item" id="devient-vendeur-btn">
+            <%= link_to "Devient vendeur", new_item_path, class: "nav-btn" %>
           </li>
-          <li class="nav-item dropdown">
+
+          <li class="nav-item dropdown" id="avatar-image">
           <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= image_tag "user_avatar.png", class: "avatar", alt: "dropdown menu" %>
+            <% if @user.image %>
+            <img src="<%= @user.image %>" class="rounded-circle" alt="Image de profil" style="width: 50px; height: 50px;">
+          <% else %>
+            <img src="app/assets/images/user_avatar.png" class="rounded-circle" alt="Image de profil par défaut">
+            <% end %>
           </a>
+
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Action", dashboards_path, class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+              <%= link_to "Profil", dashboards_path, class: "dropdown-item" %>
+              <%= link_to "Déconnexion", destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item" %>
             </div>
           </li>
         <% else %>

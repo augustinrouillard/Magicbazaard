@@ -6,8 +6,7 @@
 
 .navbar-lewagon .navbar-collapse {
   flex-grow: 0;
-  padding-bottom: 150px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  padding-bottom: 30px;
 }
 
 .navbar-lewagon .navbar-brand img {
@@ -28,23 +27,47 @@
   background: white;
   border-radius: 32px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  padding: 4px 4px 4px 16px;
+  padding: 8px 16px;
   max-width: 850px;
-  height: 64px;
+  height: auto;
   margin: 0 auto;
-  gap: 8px;
+  margin-left: 400px;
 }
 
-.search-item {
-  flex: 1;
-  padding: 0 12px;
-  border-right: 1px solid #ddd;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100%;
+.search-bar .form-control {
+  height: 48px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  padding-left: 16px;
+  font-size: 16px;
 }
+
+.search-bar .form-select {
+  height: 42px;
+  width: 200px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  padding-left: 16px;
+  font-size: 16px;
+}
+.search-bar .btn {
+  height: 48px;
+   width: 48px;
+  display: flex;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+  font-weight: 500;
+  background-color: #4b367c;
+  color: white;
+  border: none;
+}
+
+.search-bar .btn:hover {
+  background-color: #382961;
+}
+
 
 .search-item:last-of-type {
   border-right: none;
@@ -62,7 +85,7 @@
   border: none;
   outline: none;
   font-size: 14px;
-  color: #222;
+  color: #000000;
   width: 100%;
 }
 
@@ -85,7 +108,37 @@
   background-color: #473462;
 }
 
-#search-icon{
+#search-icon {
   width: 20px;
   height: auto;
+}
+
+#devient-vendeur-btn {
+  margin-top: 30px;
+  color:rgba(0, 0, 0, 0.1);
+}
+
+#avatar-image {
+  margin-top: 25px;
+  margin-right: 20px;
+}
+
+#devient-vendeur-btn .nav-btn {
+  color: black;
+  display: inline-block;
+  border-radius: 5px;
+  padding: 8px 8px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  font-family: "Nunito", "Helvetica", "sans-serif";
+  background-color: white;
+  margin-right: 15px;
+}
+
+#devient-vendeur-btn .nav-btn:hover {
+  background-color: #473462;
+  border-color: white;
+  color: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }

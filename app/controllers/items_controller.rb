@@ -2,14 +2,25 @@ class ItemsController < ApplicationController
 
 def index
   @items = Item.all
+  if params[:query].present?
+    sql_subquery = "name ILIKE :query"
+    @items = @items.where(sql_subquery, query: "%#{params[:query]}%")
+  end
+  if params[:category].present?
+    sql_subquery_category = "category ILIKE :category"
+    @items = @items.where(sql_subquery_category, category: "%#{params[:category]}%")
+  end
+  @user = current_user
 end
 
 def show
  @item = Item.find(params[:id])
+ @user = current_user
 end
 
 def new
   @item = Item.new
+  @user = current_user
 end
 
 def create
@@ -26,9 +37,10 @@ end
 
 def edit
   @item = Item.find(params[:id])
-  # if @item.user != current_user
-  #   redirect_to item_path(@item), alert: 'You are not authorized to edit this item.'
-  # end
+  if @item.user != current_user
+    redirect_to item_path(@item), alert: 'You are not authorized to edit this item.'
+  end
+  @user = current_user
 end
 
 def update
