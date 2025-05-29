@@ -27,14 +27,13 @@
         <% if user_signed_in? %>
           <li class="nav-item active">
             <%= link_to "#", class: "nav-link" do %>
-              <%= image_tag "globe_icon.png", id: "globe-icon", alt: "Home" %>
             <% end %>
           </li>
-          <li class="nav-item">
-            <%= link_to "Devient vendeur", new_item_path, class: "nav-link" %>
+          <li class="nav-item" id="devient-vendeur-btn">
+            <%= link_to "Devient vendeur", new_item_path, class: "nav-btn" %>
           </li>
-          <li class="nav-item dropdown">
 
+          <li class="nav-item dropdown" id="avatar-image">
           <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <% if @user.image %>
             <img src="<%= @user.image %>" class="rounded-circle" alt="Image de profil" style="width: 50px; height: 50px;">

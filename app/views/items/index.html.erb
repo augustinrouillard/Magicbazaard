@@ -1,16 +1,18 @@
 <div class="container mt-4">
-
   <h1><strong>Les derniers objets magiques :</strong></h1>
+
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-6 g-4">
     <% @items.each do |item| %>
       <div class="col text-center">
         <% if item.image.attached? %>
           <div class="card shadow-sm rounded-5 overflow-hidden">
-            <%= cl_image_tag item.image.key,
-              height: 200,
-              width: 1000,
-              crop: :fit,
-              class: "card-img-top object-fit-cover" %>
+            <%= link_to item_path(item) do %>
+              <%= cl_image_tag item.image.key,
+                height: 200,
+                width: 1000,
+                crop: :fit,
+                class: "card-img-top object-fit-cover" %>
+            <% end %>
           </div>
         <% end %>
 
@@ -20,8 +22,9 @@
       </div>
     <% end %>
   </div>
+
   <div class="d-flex justify-content-between align-items-center mb-3">
-      <%= link_to "Add New Item", new_item_path, class: "btn btn-secondary" %>
-      <%= link_to "Dashboard", dashboards_path, class: "btn btn-warning" %>
+    <%= link_to "Add New Item", new_item_path, class: "btn btn-secondary" %>
+    <%= link_to "Dashboard", dashboards_path, class: "btn btn-warning" %>
   </div>
 </div>
