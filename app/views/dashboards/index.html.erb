@@ -48,7 +48,7 @@
                 <h5 class="card-title"><%= item.name %></h5>
                 <p class="card-text"><%= truncate(item.description, length: 80) %></p>
                 <p class="card-text"><strong>Catégorie :</strong> <%= item.category %></p>
-                <%= link_to "Voir l'objet", item_path(item), class: "btn btn-outline-primary btn-sm" %>
+                <%= link_to "Voir l'objet", item_path(item), class: "btn btn-primary btn-sm" %>
               </div>
             </div>
           </div>
@@ -91,13 +91,19 @@
               <% if reservation.item.image.attached? %>
                 <div class="col-md-6">
                   <div class="card shadow-sm rounded-5 overflow-hidden h-100">
-                    <%= cl_image_tag reservation.item.image.key,
-                      height: 200,
-                      width: 1000,
-                      class: "card-img-top object-fit-cover" %>
+                    <%= link_to item_path(reservation.item) do %>
+                      <%= cl_image_tag reservation.item.image.key,
+                        height: 200,
+                        width: 1000,
+                        class: "card-img-top object-fit-cover" %>
+                    <% end %>
                     <div class="card-body">
-                      <p class="mb-1"><%= reservation.item.name %></p>
-                      <small class="text-muted">Du <%= reservation.starting_date %> au <%= reservation.ending_date %></small>
+                      <h5 class="card-title mb-1">
+                        <%= link_to reservation.item.name, item_path(reservation.item), class: "text-decoration-none text-dark fw-semibold" %>
+                      </h5>
+                      <p class="card-text mb-2">
+                        Du <%= reservation.starting_date.strftime('%d/%m/%Y') %> au <%= reservation.ending_date.strftime('%d/%m/%Y') %>
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -119,13 +125,19 @@
               <% if reservation.item.image.attached? %>
                 <div class="col-md-6">
                   <div class="card shadow-sm rounded-5 overflow-hidden h-100">
-                    <%= cl_image_tag reservation.item.image.key,
-                      height: 200,
-                      width: 1000,
-                      class: "card-img-top object-fit-cover" %>
+                    <%= link_to item_path(reservation.item) do %>
+                      <%= cl_image_tag reservation.item.image.key,
+                        height: 200,
+                        width: 1000,
+                        class: "card-img-top object-fit-cover" %>
+                    <% end %>
                     <div class="card-body">
-                      <p class="mb-1"><%= reservation.item.name %></p>
-                      <small class="text-muted">Du <%= reservation.starting_date %> au <%= reservation.ending_date %></small>
+                      <h5 class="card-title mb-1">
+                        <%= link_to reservation.item.name, item_path(reservation.item), class: "text-decoration-none text-dark fw-semibold" %>
+                      </h5>
+                      <p class="card-text mb-2">
+                        Du <%= reservation.starting_date.strftime('%d/%m/%Y') %> au <%= reservation.ending_date.strftime('%d/%m/%Y') %>
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -133,27 +145,33 @@
             <% end %>
           </div>
         <% else %>
-          <p class="text-muted">Aucune réservation passée.</p>
+          <p class="text-muted">Aucune réservation en cours.</p>
         <% end %>
       </div>
 
       <!-- Réservations futures -->
       <div class="mb-5">
         <h2 class="fw-semibold mb-4">Mes réservations à venir</h2>
-        <%# Affichage des réservations à venir %>
         <% if @reservations.upcoming.any? %>
           <div class="row g-4">
             <% @reservations.upcoming.order(starting_date: :asc).each do |reservation| %>
               <% if reservation.item.image.attached? %>
                 <div class="col-md-6">
                   <div class="card shadow-sm rounded-5 overflow-hidden h-100">
-                    <%= cl_image_tag reservation.item.image.key,
-                      height: 200,
-                      width: 1000,
-                      class: "card-img-top object-fit-cover" %>
+                    <%= link_to item_path(reservation.item) do %>
+                      <%= cl_image_tag reservation.item.image.key,
+                        height: 200,
+                        width: 1000,
+                        class: "card-img-top object-fit-cover" %>
+                    <% end %>
                     <div class="card-body">
-                      <p class="mb-1"><%= reservation.item.name %></p>
-                      <small class="text-muted">Du <%= reservation.starting_date %> au <%= reservation.ending_date %></small>
+                      <h5 class="card-title mb-1">
+                        <%= link_to reservation.item.name, item_path(reservation.item), class: "text-decoration-none text-dark fw-semibold" %>
+                      </h5>
+                      <p class="card-text mb-2">
+                        Du <%= reservation.starting_date.strftime('%d/%m/%Y') %> au <%= reservation.ending_date.strftime('%d/%m/%Y') %>
+                      </p>
+                      <%= link_to "Modifier la réservation", edit_reservation_path(reservation), class: "btn btn-primary btn-sm" %>
                     </div>
                   </div>
                 </div>
