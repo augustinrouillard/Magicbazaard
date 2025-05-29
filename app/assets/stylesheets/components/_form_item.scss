@@ -1,0 +1,55 @@
+.formulaire-reservation {
+  max-width: 320px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fafafa;
+  border-radius: 15px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #1a1a1a;
+}
+
+.formulaire-reservation h2,
+.formulaire-reservation .tarif {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.formulaire-reservation label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.formulaire-reservation input[type="date"],
+.formulaire-reservation input[type="text"],
+.formulaire-reservation select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f4f4f4;
+  font-size: 16px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+}
+
+.formulaire-reservation button,
+.formulaire-reservation input[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background-color: #4b306a;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.formulaire-reservation button:hover,
+.formulaire-reservation input[type="submit"]:hover {
+  background-color: #3b2457;
+}

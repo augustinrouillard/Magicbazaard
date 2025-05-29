@@ -1,47 +1,48 @@
-<div class="container mt-5 mb-5">
-  <div class="card shadow border-0 rounded-4">
-    <div class="card-body p-5">
-      <h2 class="card-title text-center text-primary mb-4" style="color: #6f42c1;">Ajouter un objet magique</h2>
+<div class="booking">
+  <h2 class="form-title">Ajouter un objet magique</h2>
 
-      <%= simple_form_for(@item, html: { multipart: true }) do |f| %>
-        <div class="mb-3">
-          <%= f.input :name, input_html: { class: "form-control rounded-pill" }, label_html: { class: "form-label text-primary fw-semibold" } %>
-        </div>
-
-        <div class="mb-3">
-          <%= f.input :price, input_html: { class: "form-control rounded-pill" }, label_html: { class: "form-label text-primary fw-semibold" } %>
-        </div>
-
-        <div class="mb-3">
-          <%= f.input :description, input_html: { class: "form-control rounded-pill" }, label_html: { class: "form-label text-primary fw-semibold" } %>
-        </div>
-
-        <div class="mb-3">
-          <%= f.input :long_description, as: :text, input_html: { class: "form-control rounded-3", rows: 4 }, label_html: { class: "form-label text-primary fw-semibold" } %>
-        </div>
-
-        <div class="mb-3">
-          <%= f.input :power, as: :select, collection: Item::POWER, label: "Niveau de l'objet", input_html: { class: "form-select rounded-pill" }, label_html: { class: "form-label text-primary fw-semibold" } %>
-        </div>
-
-        <div class="mb-3">
-          <%= f.input :category, as: :select, collection: Item::CATEGORY, label: "Catégorie de l'objet", input_html: { class: "form-select rounded-pill" }, label_html: { class: "form-label text-primary fw-semibold" } %>
-        </div>
-
-        <div class="mb-4">
-          <%= f.input :image, as: :file, label: "Image de l'objet", input_html: { class: "form-control rounded-pill" }, label_html: { class: "form-label text-primary fw-semibold" } %>
-        </div>
-
-        <div class="d-grid gap-2 col-6 mx-auto">
-          <%= f.button :submit, class: "btn btn-primary rounded-pill fw-bold shadow-sm", style: "background-color: #6f42c1; border-color: #6f42c1;" do %>
-            ✨ Enregistrer l'objet
-          <% end %>
-        </div>
-      <% end %>
-
-      <div class="text-center mt-4">
-        <%= link_to "⬅ Retour aux objets", items_path, class: "btn btn-outline-secondary rounded-pill" %>
-      </div>
+  <%= simple_form_for(@item, html: { multipart: true, class: "magic-form" }) do |f| %>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.input_field :name, class: "form-control" %>
     </div>
+
+    <div class="form-group">
+      <%= f.label :price %>
+      <%= f.input_field :price, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :description %>
+      <%= f.input_field :description, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :long_description %>
+      <%= f.text_area :long_description, class: "form-control", rows: 4 %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :power, "Niveau de l'objet" %>
+      <%= f.select :power, Item::POWER, {}, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :category, "Catégorie de l'objet" %>
+      <%= f.select :category, Item::CATEGORY, {}, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :image, "Image de l'objet" %>
+      <%= f.file_field :image, class: "form-control" %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, "✨ Enregistrer l'objet", class: "btn-submit" %>
+    </div>
+  <% end %>
+
+  <div class="form-actions">
+    <%= link_to "⬅ Retour aux objets", items_path, class: "btn-link" %>
   </div>
 </div>
