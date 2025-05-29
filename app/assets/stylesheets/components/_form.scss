@@ -125,3 +125,18 @@
   margin-top: 10px;
   font-weight: bold;
 }
+.reservation-layout {
+  display: flex;
+  gap: 2rem; /* espace entre les cartes */
+  flex-wrap: wrap; /* permet le retour à la ligne sur petits écrans */
+  margin-top: 2rem;
+}
+
+.reservation-box {
+  flex: 1;
+  min-width: 300px;
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
