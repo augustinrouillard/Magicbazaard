@@ -1,17 +1,24 @@
 <main class="container">
   <section class="item-header">
-
-    <div class="d-flex justify-content-between align-items-center mb-4">
-
-    <h1><%= @item.name %></h1>
-        <%= link_to "Editer l'objet", edit_item_path(@item), class: "btn btn-outline-secondary" %>
-
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <h1><%= @item.name %></h1>
+      <% if @item.user == current_user %>
+        <%= link_to "Supprimer l'objet", item_path(@item), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this item?" }, class: "btn btn-outline-danger", style: "border-radius: 0.5rem;" %>
+      <% end %>
     </div>
-    <div class="meta">
-      <%# <span>🥇 Supervendeur · <a href="#">Bordeaux, France</a></span> %>
-    </div>
+    <div class="meta"></div>
+    <% if @item.reviews.any? %>
+      <% total_rating = @item.reviews.sum(:rating) %>
+      <% average_rating = total_rating / @item.reviews.count.to_f if @item.reviews.count > 0 %>
+      <p>
+        ⭐ <strong><%= average_rating.round(1) %></strong>
+        · <a href="#reviews"><%= @item.reviews.count %> commentaires</a>
+        · <span> 🥇 Supervendeur
+          · <a href="#"><%= @item.user.address %></a>
+        </span>
+      </p>
+    <% end %>
   </section>
-
 
   <%# IMAGE GALLERY %>
   <% if @item.image.attached? %>
@@ -29,117 +36,116 @@
     </div>
   <% end %>
 
-  <%# FORMULAIRE %>
-
   <%# DESCRIPTION %>
   <div class="container2">
     <section class="item-info">
-      <h2><%= @item.description %></h2>
+      <div class="d-flex justify-content-between align-items-center">
+        <!-- Partie gauche : description et note -->
+        <div>
+          <h2><%= @item.description %></h2>
+          <% if @item.reviews.any? %>
+            <% total_rating = @item.reviews.sum(:rating) %>
+            <% average_rating = total_rating / @item.reviews.count.to_f if @item.reviews.count > 0 %>
+          <% end %>
+        </div>
+        <!-- Partie droite : image utilisateur -->
+        <div>
+          <% if @item.user.image.present? %>
+            <img src="<%= @item.user.image %>" alt="Photo de <%= @item.user.name %>" class="rounded-circle" width="80" height="80">
+          <% else %>
+            <img src="/assets/default-avatar.png" alt="Avatar par défaut" class="rounded-circle" width="80" height="80">
+          <% end %>
+        </div>
+      </div>
 
-<% if @item.reviews.any? %>
-        <ul class="list-unstyled">
-          <% total_rating = @item.reviews.sum(:rating) %>
-          <% average_rating = total_rating / @item.reviews.count if @item.reviews.count > 0 %>
-          <p>Note : <strong><%= average_rating %> ⭐</strong></p>
-<% end %>
-
-
-
-
-
-
-
-
-
-
-
-      <div class="info-box"> 🪄 <%= @item.category.capitalize %> de <strong>niveau <%= @item.power %></strong>  </div>
-      <% if @item.category == "chaudron" %>
-        <div class="info-box">✨ Peut aussi servir à faire une excellente soupe aux orties (avec ou sans sortilèges).</div>
-      <% elsif @item.category == "balais" %>
-        <div class="info-box">✨ Peut aussi servir à enlever la poussière</div>
-      <% elsif @item.category == "baguette" %>
-        <div class="info-box">✨ Peut aussi servir à mélanger le café… mais attention aux explosions.</div>
-      <% elsif @item.category == "amulette" %>
-        <div class="info-box">✨ Protège contre les malédictions… et les mauvais rencards.</div>
-      <% elsif @item.category == "cape" %>
-        <div class="info-box">✨ Peut aussi cacher une tenue douteuse en cas d'urgence fashion.</div>
-        <% else %>
-        <div class="info-box">✨ marche po</div>
+      <div class="info-box">
+        🪄 <%= @item.category.capitalize %> de <strong>niveau <%= @item.power %></strong>
+      </div>
+      <% if @item.category == "Chaudron" %>
+        <div class="info-box">
+          ✨ Peut aussi servir à faire une excellente soupe aux orties (avec ou sans sortilèges).
+        </div>
+      <% elsif @item.category == "Balais" %>
+        <div class="info-box">
+          ✨ Peut aussi servir à enlever la poussière
+        </div>
+      <% elsif @item.category == "Baguette" %>
+        <div class="info-box">
+          ✨ Peut aussi servir à mélanger le café… mais attention aux explosions.
+        </div>
+      <% elsif @item.category == "Amulette" %>
+        <div class="info-box">
+          ✨ Protège contre les malédictions… et les mauvais rencards.
+        </div>
+      <% elsif @item.category == "Cape" %>
+        <div class="info-box">
+          ✨ Peut aussi cacher une tenue douteuse en cas d'urgence fashion.
+        </div>
+      <% else %>
+        <div class="info-box">
+          ✨ marche po
+        </div>
       <% end %>
 
-      <div class="description">
+      <%# DESCRIPTION %>
+      <div class="description mt-5">
         <h3>Description</h3>
         <p><%= @item.long_description %></p>
       </div>
 
       <%# REVIEWS %>
-
-      <div class="reviews">
-        <h3 class="d-flex justify-content-between align-items-center ts-4">
-          Reviews
-          <%= link_to "Ajouter une review", new_item_review_path(@item), class: "text-decoration-none fs-6",  style: "color: #6f42c1;" %>
+      <div class="reviews mt-5" id="reviews">
+        <h3 class="d-flex justify-content-between align-items-center ts-4 mb-3">
+          Avis des utilisateurs
+          <%= link_to "Ajouter une review", new_item_review_path(@item), class: "text-decoration-none fs-6", style: "color: #6f42c1;" %>
         </h3>
-</div>
+      </div>
 
-
-        <% if @item.reviews.any? %>
-          <ul class="list-unstyled">
-            <% total_rating = @item.reviews.sum(:rating) %>
-            <% average_rating = total_rating / @item.reviews.count if @item.reviews.count > 0 %>
-
-
-            <% @item.reviews.each do |review| %>
-              <h5 class="font-weight-bold">
-                <strong><%= review.user.name %> - <%= review.rating %> ⭐</strong>
-              </h5>
-              <div style="display: flex; justify-content: space-between; align-items: center;">
-                <p style="margin: 1;">
-                  <%= review.content %>
-                  <small> - Il y a <%= time_ago_in_words(review.created_at) %></small>
-                </p>
-                <% if review.user_id == current_user.id %>
-                  <%= link_to "✖", review_path(review),
-                        data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this review?" },
-                        class: "text-danger", style: "text-decoration: none; font-size: 1rem; margin-left: 1rem;" %>
-                <% end %>
-              </div>
-            <% end %>
-          </ul>
-        <% else %>
-          <p>No reviews yet</p>
-        <% end %>
-
-</section>
+      <% if @item.reviews.any? %>
+        <ul class="list-unstyled">
+          <% total_rating = @item.reviews.sum(:rating) %>
+          <% average_rating = total_rating / @item.reviews.count if @item.reviews.count > 0 %>
+          <% @item.reviews.each do |review| %>
+            <h5 class="font-weight-bold">
+              <strong><%= review.user.name %> - <%= review.rating %> ⭐</strong>
+            </h5>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <p style="margin: 1;">
+                <%= review.content %>
+                <small> - Il y a <%= time_ago_in_words(review.created_at) %></small>
+              </p>
+              <% if review.user_id == current_user.id %>
+                <%= link_to "✖", review_path(review),
+                      data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this review?" },
+                      class: "text-danger", style: "text-decoration: none; font-size: 1rem; margin-left: 1rem;" %>
+              <% end %>
+            </div>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>No reviews yet</p>
+      <% end %>
+    </section>
 
     <aside class="booking">
-
-      <div class="price">£<%= @item.price.round %> / jour</div>
-
+      <div class="price"><%= @item.price.round %>€ / jour</div>
       <%# <span>⭐ <%= existing_rating.score %>
       <%# <a href="#">7 commentaires</a></span> %>
-
       <%= form_with url: new_item_reservation_path(@item), method: :get, local: true do %>
-        <div class="form-group">
+        <div class="form-group mt-3">
           <label for="startDate">Date de début</label>
           <input type="date" name="start_date" class="form-control" id="startDate">
         </div>
-
-        <div class="form-group">
+        <div class="form-group mt-3">
           <label for="endDate">Date de fin</label>
           <input type="date" name="end_date" class="form-control" id="endDate">
         </div>
-
-        <%= submit_tag "Réserver", class: "btn btn-primary" %>
+        <%= submit_tag "Réserver", class: "btn btn-primary mt-3" %>
       <% end %>
+      <div class="summary mt-5">
+        <h4>Informations importantes</h4>
 
+<p>
 
-      <div class="summary"></div>
-    </aside>
-
-    <%# BOUTONS %>
-
-    <%= link_to "Supprimer l'objet", item_path(@item), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this item?" }, class: "btn btn-outline-danger" %>
-  </div>
-
-  <%# <% if @item.image.attached? %>
+  <strong>⚠️ Attention :</strong> Magic Bazaar n’est pas responsable des incidents magiques liés à l’utilisation des objets. Soyez prudent !
+</p>
