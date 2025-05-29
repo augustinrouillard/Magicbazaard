@@ -55,8 +55,7 @@ user_5 = User.create!(
   address: "5 Quai Branly, Paris",
   email: "vincent@gmail.com",
   password: "password123",
-  image: "https://res.cloudinary.com/dthdn3cs6/image/upload/Vincent_uaxybz
-"
+  image: "https://res.cloudinary.com/dthdn3cs6/image/upload/Vincent_hb5evt"
 )
 
 

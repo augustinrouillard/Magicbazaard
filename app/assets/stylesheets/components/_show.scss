@@ -35,7 +35,7 @@ body {
   display: flex;
   flex-direction: column;
   grid-template-columns: 2fr 1fr;
-  gap: 2rem;
+  gap: 1rem;
   padding: 2rem;
   max-width: 1200px;
   margin: auto;
@@ -147,4 +147,8 @@ body {
 .summary {
   margin-top: 1rem;
   font-size: 0.9rem;
+}
+
+.rounded-custom {
+  border-radius: 0.5rem;
 }
