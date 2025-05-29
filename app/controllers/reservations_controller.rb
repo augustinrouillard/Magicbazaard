@@ -1,15 +1,21 @@
 class ReservationsController < ApplicationController
   def new
-    @reservation = Reservation.new
     @item = Item.find(params[:item_id])
-    @user = @item.user
-    @reservations = Reservation.all
-    if params[:starting_date] && params[:ending_date]
-      @starting_date = Date.parse(params[:starting_date])
-      @ending_date = Date.parse(params[:ending_date])
+
+    @starting_date = parse_date(params[:start_date])
+    @ending_date = parse_date(params[:end_date])
+
+    if @starting_date && @ending_date
       @duration = (@ending_date - @starting_date).to_i
-      @total_price = @item.price * @duration
+      @total_price = @duration * @item.price
     end
+
+    @reservation = Reservation.new(
+      starting_date: @starting_date,
+      ending_date: @ending_date,
+      item: @item
+    )
+    @user = current_user
   end
 
   def create
@@ -44,5 +50,9 @@ class ReservationsController < ApplicationController
   private
   def reservation_params
     params.require(:reservation).permit(:starting_date, :ending_date, :item_id)
+  end
+
+  def parse_date(param)
+    Date.parse(param) rescue nil
   end
 end

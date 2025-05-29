@@ -1,12 +1,22 @@
+<%# Page de dashboard utilisateur - Affichage des infos, commentaires et réservations %>
 <div class="container my-5">
-  <!-- Carte utilisateur seule et centrée -->
+  <!-- Titre principal -->
   <h1 class="text-center mb-5 fw-bold display-4">À propos de moi</h1>
 
+  <!-- Carte profil utilisateur -->
   <div class="d-flex justify-content-center mb-5">
     <div class="card shadow-lg border-0 rounded-4" style="width: 22rem;">
       <div class="card-body">
+        <div class="text-center mb-3">
+          <% if @user.image %>
+            <img src="<%= @user.image %>" class="rounded-circle" alt="Image de profil" style="width: 100px; height: 100px;">
+          <% else %>
+            <img src="app/assets/images/user_avatar.png" class="rounded-circle" alt="Image de profil par défaut">
+            <% end %>
+        </div>
         <h5 class="card-title fw-bold mb-3 text-center"><%= @user.name %></h5>
         <p class="card-text text-muted">
+          <%# Informations principales de l'utilisateur %>
           <strong>Email :</strong> <%= @user.email %><br>
           <strong>Adresse :</strong> <%= @user.address %><br>
           <strong>Téléphone :</strong> <%= @user.phone_number %><br>
@@ -19,11 +29,42 @@
     </div>
   </div>
 
-  <!-- Ligne à deux colonnes -->
+  <!-- Section des items de l'utilisateur -->
+  <div class="mt-5 mb-5">
+    <h2 class="fw-semibold mb-4">Mes objets à la location</h2>
+    <%# Affichage des items de l'utilisateur %>
+    <% if @items.any? %>
+      <div class="row g-4">
+        <% @items.each do |item| %>
+          <div class="col-md-4">
+            <div class="card shadow-sm rounded-4 h-100">
+              <% if item.image.attached? %>
+                <%= cl_image_tag item.image.key,
+                  height: 200,
+                  width: 1000,
+                  class: "card-img-top object-fit-cover" %>
+              <% end %>
+              <div class="card-body">
+                <h5 class="card-title"><%= item.name %></h5>
+                <p class="card-text"><%= truncate(item.description, length: 80) %></p>
+                <p class="card-text"><strong>Catégorie :</strong> <%= item.category %></p>
+                <%= link_to "Voir l'objet", item_path(item), class: "btn btn-outline-primary btn-sm" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="text-muted">Vous n'avez pas encore mis d'objet en vente.</p>
+    <% end %>
+  </div>
+
+  <!-- Section principale à deux colonnes : Commentaires & Réservations -->
   <div class="row">
-    <!-- Commentaires -->
+    <!-- Colonne des commentaires -->
     <div class="col-md-6 mb-5">
       <h2 class="fw-semibold mb-4">Mes commentaires</h2>
+      <%# Affichage des commentaires de l'utilisateur %>
       <% if @comments.any? %>
         <ul class="list-group shadow-sm">
           <% @comments.order(created_at: :desc).each do |comment| %>
@@ -38,90 +79,91 @@
       <% end %>
     </div>
 
-    <!-- Réservations -->
-
-
+    <!-- Colonne des réservations -->
     <div class="col-md-6">
-      <!-- Passées -->
+      <!-- Réservations passées -->
       <div class="mb-5">
-  <h2 class="fw-semibold mb-4">Mes réservations passées</h2>
-  <% if @reservations.past.any? %>
-    <div class="row g-4">
-      <% @reservations.past.order(starting_date: :asc).each do |reservation| %>
-        <% if reservation.item.image.attached? %>
-          <div class="col-md-6">
-            <div class="card shadow-sm rounded-5 overflow-hidden h-100">
-              <%= cl_image_tag reservation.item.image.key,
-                height: 200,
-                width: 1000,
-                class: "card-img-top object-fit-cover" %>
-              <div class="card-body">
-                <p class="mb-1"><strong>Item :</strong> <%= reservation.item.name %></p>
-                <small class="text-muted">Du <%= reservation.starting_date %> au <%= reservation.ending_date %></small>
-              </div>
-            </div>
+        <h2 class="fw-semibold mb-4">Mes réservations passées</h2>
+        <%# Affichage des réservations passées %>
+        <% if @reservations.past.any? %>
+          <div class="row g-4">
+            <% @reservations.past.order(starting_date: :asc).each do |reservation| %>
+              <% if reservation.item.image.attached? %>
+                <div class="col-md-6">
+                  <div class="card shadow-sm rounded-5 overflow-hidden h-100">
+                    <%= cl_image_tag reservation.item.image.key,
+                      height: 200,
+                      width: 1000,
+                      class: "card-img-top object-fit-cover" %>
+                    <div class="card-body">
+                      <p class="mb-1"><%= reservation.item.name %></p>
+                      <small class="text-muted">Du <%= reservation.starting_date %> au <%= reservation.ending_date %></small>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
           </div>
+        <% else %>
+          <p class="text-muted">Aucune réservation passée.</p>
         <% end %>
-      <% end %>
-    </div>
-  <% else %>
-    <p class="text-muted">Aucune réservation passée.</p>
-  <% end %>
-</div>
+      </div>
 
-      <!-- En cours -->
+      <!-- Réservations en cours -->
       <div class="mb-5">
-  <h2 class="fw-semibold mb-4">Mes réservations en cours</h2>
-  <% if @reservations.current.any? %>
-    <div class="row g-4">
-      <% @reservations.current.order(starting_date: :asc).each do |reservation| %>
-        <% if reservation.item.image.attached? %>
-          <div class="col-md-6">
-            <div class="card shadow-sm rounded-5 overflow-hidden h-100">
-              <%= cl_image_tag reservation.item.image.key,
-                height: 200,
-                width: 1000,
-                class: "card-img-top object-fit-cover" %>
-              <div class="card-body">
-                <p class="mb-1"><strong>Item :</strong> <%= reservation.item.name %></p>
-                <small class="text-muted">Du <%= reservation.starting_date %> au <%= reservation.ending_date %></small>
-              </div>
-            </div>
+        <h2 class="fw-semibold mb-4">Mes réservations en cours</h2>
+        <%# Affichage des réservations en cours %>
+        <% if @reservations.current.any? %>
+          <div class="row g-4">
+            <% @reservations.current.order(starting_date: :asc).each do |reservation| %>
+              <% if reservation.item.image.attached? %>
+                <div class="col-md-6">
+                  <div class="card shadow-sm rounded-5 overflow-hidden h-100">
+                    <%= cl_image_tag reservation.item.image.key,
+                      height: 200,
+                      width: 1000,
+                      class: "card-img-top object-fit-cover" %>
+                    <div class="card-body">
+                      <p class="mb-1"><%= reservation.item.name %></p>
+                      <small class="text-muted">Du <%= reservation.starting_date %> au <%= reservation.ending_date %></small>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
           </div>
+        <% else %>
+          <p class="text-muted">Aucune réservation passée.</p>
         <% end %>
-      <% end %>
-    </div>
-  <% else %>
-    <p class="text-muted">Aucune réservation passée.</p>
-  <% end %>
-</div>
+      </div>
 
-      <!-- Futures -->
+      <!-- Réservations futures -->
       <div class="mb-5">
-  <h2 class="fw-semibold mb-4">Mes réservations en cours</h2>
-  <% if @reservations.upcoming.any? %>
-    <div class="row g-4">
-      <% @reservations.upcoming.order(starting_date: :asc).each do |reservation| %>
-        <% if reservation.item.image.attached? %>
-          <div class="col-md-6">
-            <div class="card shadow-sm rounded-5 overflow-hidden h-100">
-              <%= cl_image_tag reservation.item.image.key,
-                height: 200,
-                width: 1000,
-                class: "card-img-top object-fit-cover" %>
-              <div class="card-body">
-                <p class="mb-1"><strong>Item :</strong> <%= reservation.item.name %></p>
-                <small class="text-muted">Du <%= reservation.starting_date %> au <%= reservation.ending_date %></small>
-              </div>
-            </div>
+        <h2 class="fw-semibold mb-4">Mes réservations à venir</h2>
+        <%# Affichage des réservations à venir %>
+        <% if @reservations.upcoming.any? %>
+          <div class="row g-4">
+            <% @reservations.upcoming.order(starting_date: :asc).each do |reservation| %>
+              <% if reservation.item.image.attached? %>
+                <div class="col-md-6">
+                  <div class="card shadow-sm rounded-5 overflow-hidden h-100">
+                    <%= cl_image_tag reservation.item.image.key,
+                      height: 200,
+                      width: 1000,
+                      class: "card-img-top object-fit-cover" %>
+                    <div class="card-body">
+                      <p class="mb-1"><%= reservation.item.name %></p>
+                      <small class="text-muted">Du <%= reservation.starting_date %> au <%= reservation.ending_date %></small>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
           </div>
+        <% else %>
+          <p class="text-muted">Aucune réservation de prévu.</p>
         <% end %>
-      <% end %>
-    </div>
-  <% else %>
-    <p class="text-muted">Aucune réservation passée.</p>
-  <% end %>
-</div>
+      </div>
     </div>
   </div>
 </div>
