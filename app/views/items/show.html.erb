@@ -117,7 +117,7 @@
       <%# <span>⭐ <%= existing_rating.score %>
       <%# <a href="#">7 commentaires</a></span> %>
 
-      <%= form_with url: new_item_reservation_path(@item), method: :get, local: true do %>
+      <%= form_with url: new_item_reservation_path(@item), method: :get, local: true, html: { class: "magic-form" } do %>
         <div class="form-group">
           <label for="startDate">Date de début</label>
           <input type="date" name="start_date" class="form-control" id="startDate">
@@ -128,8 +128,11 @@
           <input type="date" name="end_date" class="form-control" id="endDate">
         </div>
 
-        <%= submit_tag "Réserver", class: "btn btn-primary" %>
+        <div class="form-actions">
+          <%= submit_tag "✨ Réserver", class: "btn-submit" %>
+        </div>
       <% end %>
+
 
 
       <div class="summary"></div>
