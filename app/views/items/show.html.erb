@@ -52,8 +52,10 @@
         </div>
         <!-- Partie droite : image utilisateur -->
         <div>
-          <% if @item.user.image.present? %>
-            <img src="<%= @item.user.image %>" alt="Photo de <%= @item.user.name %>" class="rounded-circle" width="80" height="80">
+            <% if @item.user.image.present? %>
+            <%= link_to user_profile_path(@item.user) do %>
+              <img src="<%= @item.user.image %>" alt="Photo de <%= @item.user.name %>" class="rounded-circle" width="80" height="80">
+            <% end %>
           <% else %>
             <img src="/assets/default-avatar.png" alt="Avatar par défaut" class="rounded-circle" width="80" height="80">
           <% end %>
