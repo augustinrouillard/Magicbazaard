@@ -54,15 +54,15 @@
 
 
       <div class="info-box"> 🪄 <%= @item.category.capitalize %> de <strong>niveau <%= @item.power %></strong>  </div>
-      <% if @item.category == "chaudron" %>
+      <% if @item.category == "Chaudron" %>
         <div class="info-box">✨ Peut aussi servir à faire une excellente soupe aux orties (avec ou sans sortilèges).</div>
-      <% elsif @item.category == "balais" %>
+      <% elsif @item.category == "Balais" %>
         <div class="info-box">✨ Peut aussi servir à enlever la poussière</div>
-      <% elsif @item.category == "baguette" %>
+      <% elsif @item.category == "Baguette" %>
         <div class="info-box">✨ Peut aussi servir à mélanger le café… mais attention aux explosions.</div>
-      <% elsif @item.category == "amulette" %>
+      <% elsif @item.category == "Amulette" %>
         <div class="info-box">✨ Protège contre les malédictions… et les mauvais rencards.</div>
-      <% elsif @item.category == "cape" %>
+      <% elsif @item.category == "Cape" %>
         <div class="info-box">✨ Peut aussi cacher une tenue douteuse en cas d'urgence fashion.</div>
         <% else %>
         <div class="info-box">✨ marche po</div>
