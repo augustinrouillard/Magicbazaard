@@ -1,21 +1,22 @@
 class ReservationsController < ApplicationController
   def new
-  @item = Item.find(params[:item_id])
-  
-  @starting_date = parse_date(params[:start_date])
-  @ending_date = parse_date(params[:end_date])
+    @item = Item.find(params[:item_id])
 
-  if @starting_date && @ending_date
-    @duration = (@ending_date - @starting_date).to_i
-    @total_price = @duration * @item.price
+    @starting_date = parse_date(params[:start_date])
+    @ending_date = parse_date(params[:end_date])
+
+    if @starting_date && @ending_date
+      @duration = (@ending_date - @starting_date).to_i
+      @total_price = @duration * @item.price
+    end
+
+    @reservation = Reservation.new(
+      starting_date: @starting_date,
+      ending_date: @ending_date,
+      item: @item
+    )
+    @user = current_user
   end
-
-  @reservation = Reservation.new(
-    starting_date: @starting_date,
-    ending_date: @ending_date,
-    item: @item
-  )
-end
 
   def create
     @reservation = Reservation.new(reservation_params)
