@@ -1,4 +1,4 @@
-<main class="container container-wide">
+<main class="container">
   <section class="item-header">
     <div class="d-flex justify-content-between align-items-center mb-2">
       <h1><%= @item.name %></h1>
@@ -6,6 +6,7 @@
 
         <%= link_to "Modifier l'objet", edit_item_path(@item), class: "btn btn-outline-secondary", style: "border-radius: 0.5rem;"  %>
       <% end %>
+
     </div>
     <div class="meta"></div>
     <% if @item.reviews.any? %>
@@ -20,6 +21,7 @@
       </p>
     <% end %>
   </section>
+
   <%# IMAGE GALLERY %>
   <% if @item.image.attached? %>
     <div class="row p-4" style="height: 100%;">
@@ -137,9 +139,7 @@
       <% end %>
     </section>
 
-    <!-- FORMULAIRE DE RÉSERVATION -->
     <aside class="booking">
-
       <div class="price"><%= @item.price.round %>€ / jour</div>
       <%= form_with url: new_item_reservation_path(@item), method: :get, local: true do %>
         <div class="form-group mt-3">
