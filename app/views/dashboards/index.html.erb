@@ -7,6 +7,13 @@
   <div class="d-flex justify-content-center mb-5">
     <div class="card shadow-lg border-0 rounded-4" style="width: 22rem;">
       <div class="card-body">
+        <div class="text-center mb-3">
+          <% if @user.image %>
+            <img src="<%= @user.image %>" class="rounded-circle" alt="Image de profil" style="width: 100px; height: 100px;">
+          <% else %>
+            <img src="app/assets/images/user_avatar.png" class="rounded-circle" alt="Image de profil par défaut">
+            <% end %>
+        </div>
         <h5 class="card-title fw-bold mb-3 text-center"><%= @user.name %></h5>
         <p class="card-text text-muted">
           <%# Informations principales de l'utilisateur %>
