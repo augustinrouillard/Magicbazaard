@@ -2,6 +2,14 @@ class ItemsController < ApplicationController
 
 def index
   @items = Item.all
+  if params[:query].present?
+    sql_subquery = "name ILIKE :query"
+    @items = @items.where(sql_subquery, query: "%#{params[:query]}%")
+  end
+  if params[:category].present?
+    sql_subquery_category = "category ILIKE :category"
+    @items = @items.where(sql_subquery_category, category: "%#{params[:category]}%")
+  end
 end
 
 def show
