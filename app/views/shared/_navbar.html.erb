@@ -11,9 +11,11 @@
     <div class="search-bar">
       <%= form_with url: items_path, method: :get, class: "d-flex w-100 align-items-center gap-2" do %>
         <%= text_field_tag :query, params[:query], class: "form-control flex-grow-1", placeholder: "Nom de l'objet" %>
+
         <%= select_tag :category,
             options_for_select(["bagette", "chaudron", "amulette", "balais", "cape"], params[:category]),
             class: "form-select", prompt: "Catégorie" %>
+
         <%= button_tag "Search", class: "btn btn-primary" do %>
           <i class="fa-solid fa-magnifying-glass"></i>
         <% end %>
