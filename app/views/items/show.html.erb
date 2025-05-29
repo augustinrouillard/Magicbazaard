@@ -156,7 +156,6 @@
       </div>
     </aside>
      <% if @item.user == current_user %>
-
         <%= link_to "Supprimer l'objet", item_path(@item), data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer cet objet ?" }, class: "btn btn-outline-danger", style: "border-radius: 0.5rem;" %>
       <% end %>
   </div>
