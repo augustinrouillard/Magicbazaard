@@ -14,7 +14,7 @@
       <% average_rating = total_rating / @item.reviews.count.to_f if @item.reviews.count > 0 %>
       <p>
         ⭐ <strong><%= average_rating.round(1) %></strong>
-        · <a href="#reviews"><%= @item.reviews.count %> commentaires</a>
+        · <a href="#reviews"><%= @item.reviews.count %> avis</a>
         · <span> 🥇 Supervendeur
           · <a href="#"><%= @item.user.address %></a>
         </span>
@@ -62,7 +62,7 @@
         <!-- Partie droite : image utilisateur -->
         <div>
             <% if @item.user.image.present? %>
-            <%= link_to user_profile_path(@item.user) do %>
+            <%= link_to user_profile_path(@item.user), class: "btn btn-primary p-1" do %>
               <img src="<%= @item.user.image %>" alt="Photo de <%= @item.user.name %>" class="rounded-circle" width="80" height="80">
             <% end %>
           <% else %>

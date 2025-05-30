@@ -1,11 +1,44 @@
-<%= simple_form_for(@item) do |f| %>
-  <%= f.input :name %>
-  <%= f.input :price %>
-  <%= f.input :description %>
-  <%= f.select :power, Item::POWER %>
-  <%= f.select :category, Item::CATEGORY %>
-  <%= f.input :image, as: :file, label: "Image of item" %>
-  <%= f.submit %>
-<% end %>
+<div class="booking">
+  <h2 class="form-title">Modifier l’objet magique</h2>
 
-<%= link_to 'Back to item', item_path(@item), class: "btn btn-secondary" %>
+  <%= simple_form_for(@item, html: { multipart: true, class: "magic-form" }) do |f| %>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.input_field :name, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :price %>
+      <%= f.input_field :price, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :description %>
+      <%= f.input_field :description, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :power, "Niveau de l'objet" %>
+      <%= f.select :power, Item::POWER, {}, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :category, "Catégorie de l'objet" %>
+      <%= f.select :category, Item::CATEGORY, {}, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :image, "Image de l'objet" %>
+      <%= f.file_field :image, class: "form-control" %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, "✨ Mettre à jour l'objet", class: "btn-submit" %>
+    </div>
+  <% end %>
+
+  <div class="form-actions">
+    <%= link_to "⬅ Retour à l'objet", item_path(@item), class: "btn-link" %>
+  </div>
+</div>
+

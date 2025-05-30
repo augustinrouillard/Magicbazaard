@@ -1,51 +1,44 @@
-<h1 class="text-center">Confirmer et payer</h1>
+<h1 class="text-center mt-5">Confirmer et payer</h1>
 
 <div class="reservation-layout">
 
   <div class="reservation-box">
-    <h2><%= number_to_currency(@item.price) %> / day</h2>
+    <h2><%= @item.price %>€ / jour</h2>
 
     <% if @starting_date && @ending_date && @total_price %>
       <div class="reservation-summary">
         <p><strong>Date de début :</strong> <%= l(@starting_date) %></p>
         <p><strong>Date de fin :</strong> <%= l(@ending_date) %></p>
         <p><strong>Nombre de jours :</strong> <%= @duration %></p>
-        <p><strong>Prix unitaire :</strong> <%= number_to_currency(@item.price) %></p>
+        <p><strong>Prix unitaire :</strong> <%= @item.price %>€</p>
       </div>
     <% end %>
 
     <p class="reservation-note">Vous ne serez pas débité maintenant</p>
 
     <div class="total-section">
-      <p>Prix total : <%= number_to_currency(@total_price) %></p>
+      <p>Prix total : <%= @item.price %>€</p>
     </div>
 
     <%= simple_form_for [@item, @reservation] do |f| %>
-      <p>Modifier les dates :</p>
+
       <%= f.input :starting_date, as: :date, input_html: { value: @starting_date }, label: "Date de début" %>
       <%= f.input :ending_date, as: :date, input_html: { value: @ending_date }, label: "Date de fin" %>
       <%= f.hidden_field :item_id, value: @item.id %>
-      <%= f.submit "Valider la réservation", class: "btn-link" %>
+      <%= f.submit "Valider la réservation", class: "btn-link", style: "background-color: #4B367C; color: #fff;" %>
     <% end %>
   </div>
 
   <div class="reservation-box">
-    <h1><%= @item.name %></h1>
+    <h2 class="mb-3"><%= @item.name %></h2>
 
     <% if @item.image.attached? %>
-      <%= cl_image_tag @item.image.key, height: 300, width: 400, crop: :fill %>
+      <%= cl_image_tag @item.image.key, height: 300, width: 400, crop: :fill, style: "border-radius: 0.5rem;" %>
     <% end %>
 
-    <p>Price: <%= number_to_currency(@item.price) %></p>
-    <p>Description: <%= @item.description %></p>
-    <p>Power: <%= @item.power %></p>
-    <p>Category: <%= @item.category %></p>
+    <p class="mt-3"><%= @item.price %>€ / Jour</p>
+    <p><%= @item.description %></p>
+    <%= @item.category.capitalize %> de <strong>niveau <%= @item.power %>
   </div>
 
 </div>
-
-<div class="links">
-  <%= link_to 'Back to items', items_path, class: "btn-link" %>
-  <%= link_to 'Dashboard', dashboards_path, class: "btn-link" %>
-</div>
-
