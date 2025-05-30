@@ -1,5 +1,6 @@
 .footer {
   font-size: 0.9rem;
+  background: linear-gradient(to bottom, white, hsl(265, 30%, 52%));
 
   h5 {
     font-weight: bold;
@@ -18,4 +19,9 @@
   i {
     font-size: 1.2rem;
   }
+
+  .bg-gradient-purple-white {
+  background: linear-gradient(to bottom, white, hsl(265, 30%, 52%));
+}
+
 }

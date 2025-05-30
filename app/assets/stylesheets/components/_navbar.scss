@@ -1,7 +1,7 @@
 
 .navbar-lewagon {
   justify-content: space-between;
-  background: #7F60A9;
+  background: hsl(265, 30%, 52%);
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -49,6 +49,11 @@
   border: 1px solid #ccc;
   padding-left: 16px;
   font-size: 16px;
+
+}
+
+.bg-gradient-purple-white {
+  background: linear-gradient(to bottom, white, #9383b0);
 }
 .search-bar .btn {
   height: 48px;
