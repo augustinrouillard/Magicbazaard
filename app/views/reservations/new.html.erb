@@ -29,11 +29,13 @@
     <% end %>
   </div>
 
-  <div class="reservation-box">
+  <div class="reservation-box text-center">
     <h2 class="mb-3"><%= @item.name %></h2>
 
     <% if @item.image.attached? %>
-      <%= cl_image_tag @item.image.key, height: 300, width: 400, crop: :fill, style: "border-radius: 0.5rem;" %>
+      <div style="display: flex; justify-content: center;">
+        <%= cl_image_tag @item.image.key, height: 300, width: 400, crop: :fill, style: "border-radius: 0.5rem;" %>
+      </div>
     <% end %>
 
     <p class="mt-3"><%= @item.price %>€ / Jour</p>
