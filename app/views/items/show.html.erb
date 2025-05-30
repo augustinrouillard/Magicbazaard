@@ -1,6 +1,6 @@
 <main class="container">
   <section class="item-header">
-    <div class="d-flex justify-content-between align-items-center mb-2">
+    <div class="d-flex justify-content-between align-items-center">
       <h1><%= @item.name %></h1>
       <% if @item.user == current_user %>
 
@@ -8,7 +8,7 @@
       <% end %>
 
     </div>
-    <div class="meta"></div>
+    <div class="meta">
     <% if @item.reviews.any? %>
       <% total_rating = @item.reviews.sum(:rating) %>
       <% average_rating = total_rating / @item.reviews.count.to_f if @item.reviews.count > 0 %>
@@ -20,6 +20,7 @@
         </span>
       </p>
     <% end %>
+    </div>
   </section>
 
   <%# IMAGE GALLERY %>

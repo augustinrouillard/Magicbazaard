@@ -45,19 +45,21 @@ body {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 2rem;
-  padding: 2rem;
+  padding: 0 2rem 2rem 2rem;
   max-width: 1200px;
   margin: auto;
   background-color: white;
 }
 
 .item-header h1 {
-  margin: 0;
+  margin-left: 20px;
+  margin-bottom: 10px;
 }
 
 .meta {
   color: #666;
   font-size: 0.9rem;
+  margin-left: 20px;
 }
 
 .gallery {
