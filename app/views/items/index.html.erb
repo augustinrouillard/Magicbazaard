@@ -1,6 +1,13 @@
 <div class="container mt-4 rounded-5">
   <h1><strong>Les derniers objets magiques</strong></h1>
 
+<div class="banner mb-4 position-relative">
+  <%= image_tag "ChatGPT Image 29 mai 2025, 17_38_46.png", alt: "Bannière", class: "w-100", style: "height: 400px; object-fit: cover;" %>
+  <div class="position-absolute top-50 start-50 translate-middle text-white text-center" style="width: 100%;">
+    <h1 style="color: white; text-shadow: 2px 2px 8px #000;">Magic Bazaar, c'est pas sorcier !</h1>
+  </div>
+</div>
+
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
     <% @items.each do |item| %>
       <div class="col">

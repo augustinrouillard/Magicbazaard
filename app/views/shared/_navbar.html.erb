@@ -13,8 +13,8 @@
         <%= text_field_tag :query, params[:query], class: "form-control flex-grow-1", placeholder: "Nom de l'objet" %>
 
         <%= select_tag :category,
-            options_for_select(["bagette", "chaudron", "amulette", "balais", "cape"], params[:category]),
-            class: "form-select", prompt: "Catégorie" %>
+            options_for_select(["Baguette", "Chaudron", "Amulette", "Balais", "Cape"], params[:category]),
+            class: "form-select", placeholder: "Catégorie" %>
 
         <%= button_tag "Search", class: "btn btn-primary" do %>
           <i class="fa-solid fa-magnifying-glass"></i>
@@ -35,8 +35,8 @@
 
           <li class="nav-item dropdown" id="avatar-image">
           <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <% if @user.image %>
-            <img src="<%= @user.image %>" class="rounded-circle" alt="Image de profil" style="width: 50px; height: 50px;">
+            <% if current_user.image %>
+            <img src="<%= current_user.image %>" class="rounded-circle" alt="Image de profil" style="width: 50px; height: 50px;">
           <% else %>
             <img src="app/assets/images/user_avatar.png" class="rounded-circle" alt="Image de profil par défaut">
             <% end %>

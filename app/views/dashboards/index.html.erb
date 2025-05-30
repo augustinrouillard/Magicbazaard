@@ -39,17 +39,17 @@
           <div class="col-md-4">
             <div class="card shadow-sm rounded-4 h-100">
               <% if item.image.attached? %>
-                <%= cl_image_tag item.image.key,
-                  height: 200,
-                  width: 1000,
-                  class: "card-img-top object-fit-cover" %>
+                <%= link_to item_path(item) do %>
+                  <%= cl_image_tag item.image.key,
+                    height: 200,
+                    width: 1000,
+                    class: "card-img-top object-fit-cover" %>
+                <% end %>
               <% end %>
               <div class="card-body">
-                <h5 class="card-title"><%= item.name %></h5>
+                <%= link_to item.name, item_path(item), class: "text-decoration-none text-dark fw-semibold" %>
                 <p class="card-text"><%= truncate(item.description, length: 80) %></p>
-                <p class="card-text"><strong>Catégorie :</strong> <%= item.category %></p>
-                <%= link_to "Voir l'objet", item_path(item), class: "btn btn-primary btn-sm" %>
-              </div>
+                <p class="card-text"><strong>Catégorie :</strong> <%= item.category %></p>              </div>
             </div>
           </div>
         <% end %>
