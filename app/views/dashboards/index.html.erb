@@ -101,12 +101,12 @@
 
     <!-- Colonne des réservations -->
     <div class="col-md-6">
-      <!-- Réservations passées -->
+      <!-- Réservations futures -->
       <div class="mb-5">
-      <h2 class="fw-semibold mb-4">Mes réservations passées</h2>
-      <% if @reservations.past.any? %>
-        <div class="row g-4 <%= 'justify-content-center' if @reservations.past.select { |r| r.item.image.attached? }.size == 1 %>">
-        <% @reservations.past.order(starting_date: :asc).each do |reservation| %>
+      <h2 class="fw-semibold mb-4">Mes réservations à venir</h2>
+      <% if @reservations.upcoming.any? %>
+        <div class="row g-4 <%= 'justify-content-center' if @reservations.upcoming.select { |r| r.item.image.attached? }.size == 1 %>">
+        <% @reservations.upcoming.order(starting_date: :asc).each do |reservation| %>
           <% if reservation.item.image.attached? %>
           <div class="col-md-6">
             <div class="card shadow-sm rounded-5 overflow-hidden h-100">
@@ -123,6 +123,7 @@
               <p class="card-text mb-2">
               Du <%= reservation.starting_date.strftime('%d/%m/%Y') %> au <%= reservation.ending_date.strftime('%d/%m/%Y') %>
               </p>
+              <%= link_to "Modifier la réservation", edit_reservation_path(reservation), class: "btn btn-primary btn-sm" %>
             </div>
             </div>
           </div>
@@ -130,7 +131,7 @@
         <% end %>
         </div>
       <% else %>
-        <p class="text-muted">Aucune réservation passée.</p>
+        <p class="text-muted">Aucune réservation de prévu.</p>
       <% end %>
       </div>
 
@@ -166,13 +167,12 @@
         <p class="text-muted">Aucune réservation en cours.</p>
       <% end %>
       </div>
-
-      <!-- Réservations futures -->
+      <!-- Réservations passées -->
       <div class="mb-5">
-      <h2 class="fw-semibold mb-4">Mes réservations à venir</h2>
-      <% if @reservations.upcoming.any? %>
-        <div class="row g-4 <%= 'justify-content-center' if @reservations.upcoming.select { |r| r.item.image.attached? }.size == 1 %>">
-        <% @reservations.upcoming.order(starting_date: :asc).each do |reservation| %>
+      <h2 class="fw-semibold mb-4">Mes réservations passées</h2>
+      <% if @reservations.past.any? %>
+        <div class="row g-4 <%= 'justify-content-center' if @reservations.past.select { |r| r.item.image.attached? }.size == 1 %>">
+        <% @reservations.past.order(starting_date: :asc).each do |reservation| %>
           <% if reservation.item.image.attached? %>
           <div class="col-md-6">
             <div class="card shadow-sm rounded-5 overflow-hidden h-100">
@@ -189,7 +189,6 @@
               <p class="card-text mb-2">
               Du <%= reservation.starting_date.strftime('%d/%m/%Y') %> au <%= reservation.ending_date.strftime('%d/%m/%Y') %>
               </p>
-              <%= link_to "Modifier la réservation", edit_reservation_path(reservation), class: "btn btn-primary btn-sm" %>
             </div>
             </div>
           </div>
@@ -197,9 +196,10 @@
         <% end %>
         </div>
       <% else %>
-        <p class="text-muted">Aucune réservation de prévu.</p>
+        <p class="text-muted">Aucune réservation passée.</p>
       <% end %>
       </div>
+
     </div>
     </div>
   </div>
