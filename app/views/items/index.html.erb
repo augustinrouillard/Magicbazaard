@@ -1,9 +1,9 @@
 <div class="container mt-4 rounded-5">
-  <h1><strong>Les derniers objets magiques :</strong></h1>
+  <h1><strong>Les derniers objets magiques</strong></h1>
 
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-6 g-4">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
     <% @items.each do |item| %>
-      <div class="col text-center">
+      <div class="col">
         <% if item.image.attached? %>
           <div class="card shadow-sm rounded-5 overflow-hidden">
             <%= link_to item_path(item) do %>
@@ -16,15 +16,20 @@
           </div>
         <% end %>
 
-        <h5 class="mt-2">
-          <%= link_to item.name, item_path(item), class: "text-decoration-none text-dark" %>
-        </h5>
+        <div class="mt-2 text-start px-1">
+          <h5 class="mb-1">
+            <%= link_to item.name, item_path(item), class: "text-decoration-none text-dark" %>
+          </h5>
+          <p class="mb-0"><strong><%= item.price %>0€</strong></p>
+          <p class="text-muted mb-0"><%= item.category %></p>
+          <p class="text-muted mb-0"><small><%= truncate(item.description.split[0...8].join(' '), omission: '...') %></small></p>
+
+        </div>
       </div>
     <% end %>
   </div>
 
   <div class="d-flex justify-content-between align-items-center mb-3">
-    <%= link_to "Add New Item", new_item_path, class: "btn btn-secondary" %>
-    <%= link_to "Dashboard", dashboards_path, class: "btn btn-warning" %>
+    <%= link_to "Retour en haut de la page", new_item_path, class: "button-purple-index-item" %>
   </div>
 </div>
