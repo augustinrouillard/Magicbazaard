@@ -45,8 +45,8 @@
         <% if @user.items.any? %>
           <div class="row g-4">
             <% @user.items.each do |item| %>
-              <div class="col-md-4 h-100">
-                <div class="card shadow-sm rounded-4 h-100 d-flex flex-column">
+              <div class="col-md-4 h-150">
+                <div class="card shadow-sm rounded-4 h-150 d-flex flex-column">
                   <% if item.image.attached? %>
                     <%= link_to item_path(item) do %>
                       <%= cl_image_tag item.image.key,
@@ -55,10 +55,8 @@
                         class: "card-img-top object-fit-cover rounded-4" %>
                     <% end %>
                   <% end %>
-                  <div class="card-body">
+                  <div class="card-body card-even-bottom pb-1">
                     <%= link_to item.name, item_path(item), class: "text-decoration-none text-dark fw-semibold" %>
-                    <p class="card-text"><%= truncate(item.description, length: 80) %></p>
-                    <p class="card-text"><strong>Catégorie :</strong> <%= item.category %></p>
                   </div>
                 </div>
               </div>
@@ -90,4 +88,5 @@
       <% end %>
     </div>
   </div>
+</div>
 </div>
