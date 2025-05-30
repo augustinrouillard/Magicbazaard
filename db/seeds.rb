@@ -10,11 +10,11 @@
 
 require "open-uri"
 
-
-User.destroy_all
 Reservation.destroy_all
 Review.destroy_all
 Comment.destroy_all
+User.destroy_all
+
 
 user_1 = User.create!(
   name: "Jean",
