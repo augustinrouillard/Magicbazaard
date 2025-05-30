@@ -39,19 +39,18 @@
     <div class="col-sm-6 ms-2">
       <div class="mb-5">
         <h2 class="mb-4">Objets à louer</h2>
-
-    <% if @user.items.any? %>
-      <div class="row g-4">
-        <% @user.items.each do |item| %>
-          <div class="col-md-4">
-            <div class="card shadow-sm rounded-4 h-100">
-              <% if item.image.attached? %>
-                <%= link_to item_path(item) do %>
-                  <%= cl_image_tag item.image.key,
-                    height: 200,
-                    width: 1000,
-                    class: "card-img-top object-fit-cover" %>
-                <% end %>
+          <% if @user.items.any? %>
+            <div class="row g-4">
+              <% @user.items.each do |item| %>
+                <div class="col-md-4">
+                  <div class="card shadow-sm rounded-4 h-100">
+                    <% if item.image.attached? %>
+                      <%= link_to item_path(item) do %>
+                      <%= cl_image_tag item.image.key,
+                      height: 200,
+                      width: 1000,
+                      class: "card-img-top object-fit-cover rounded-4" %>
+                      <% end %>
               <% end %>
               <div class="card-body">
                 <%= link_to item.name, item_path(item), class: "text-decoration-none text-dark fw-semibold" %>
