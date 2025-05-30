@@ -3,6 +3,18 @@
   flex-wrap: wrap;
   gap: 24px;
   margin-top: 20px;
+  margin-left: 70px;
+  margin-right: 70px;
+
+  .reservation-box:first-child {
+    flex: 0 0 66%;
+    max-width: 66%;
+  }
+
+  .reservation-box:last-child {
+    flex: 0 0 33%;
+    max-width: 33%;
+  }
 }
 
 .reservation-box {
