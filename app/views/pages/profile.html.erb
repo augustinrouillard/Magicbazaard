@@ -1,22 +1,22 @@
 <div class="container">
   <div class="d-flex flex-row">
     <div class="col-sm-6 me-4">
-      <div class="text-center">
+      <div class="d-flex flex-row">
+        <h1 class="col-sm-8 fw-semibold ">Profil</h1>
         <% if @user.image %>
-            <img src="<%= @user.image %>" class="rounded-circle" alt="Image de profil" style="width: 100px; height: 100px;">
+            <img src="<%= @user.image %>" class="rounded-circle col-sm-4" alt="Image de profil" style="width: 100px; height: 100px;">
         <% else %>
             <img src="app/assets/images/user_avatar.png" class="rounded-circle" alt="Image de profil par défaut">
         <% end %>
-        <h1 class="text-start">Profil</h1>
       </div>
-      <p>Nom: <%= @user.name %> </p>
-      <p>Adresse: <%= @user.address %></p>
-      <p>N° Téléphone: <%= @user.phone_number %></p>
-      <p>Email: <%= @user.email %></p>
-      <p>Note: <%= @user.rating %>/5</p>
-      <h3 class="mt-4">Commentaires</h3>
+        <p>Nom: <%= @user.name %> </p>
+        <p>Adresse: <%= @user.address %></p>
+        <p>N° Téléphone: <%= @user.phone_number %></p>
+        <p>Email: <%= @user.email %></p>
+        <p>Note: <%= @user.rating %>/5</p>
+        <h3 class="mt-4">Commentaires</h3>
       <div><% @comments.each do |comment| %>
-        <div class="card mt-5 p-4">
+        <div class="card mt-5 p-4 bg-violet" >
           <div class="d-flex flex-row ">
             <div class="col-sm-6 text-start">
               <img src=<%= comment.author.image %>  class=" rounded-circle" style="width:35px; height:35px;">
@@ -25,24 +25,63 @@
               <%= comment.author.name %>
             </div>
           </div>
-          <div class="">
-          Commentaire:<%= comment.content %> <br>
-          Note: <%= comment.rating %>
+          <div class="card p-2 mt-3 pb-0">
+            Commentaire: <br><%= comment.content %> <br>
+            <p class="text-end"> Note: <%= comment.rating %></p>
           </div>
-          <%=  link_to "Effacer", comment_path(comment),
-          data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class:"btn btn-danger ms-5 p-1 m-2"%>
+          <div class="d-flex flex-row justify-content-end" style="width: 500px;">
+            <%=  link_to "Supprimer", comment_path(comment),
+            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class:"btn btn-outline-danger p-1 mt-2"%>
+          </div>
         </div><% end %>
       </div>
     </div>
     <div class="col-sm-6 ms-2">
+      <div class="mb-5">
+        <h2 class="mb-4">Objets à louer</h2>
+
+    <% if @user.items.any? %>
+      <div class="row g-4">
+        <% @user.items.each do |item| %>
+          <div class="col-md-4">
+            <div class="card shadow-sm rounded-4 h-100">
+              <% if item.image.attached? %>
+                <%= link_to item_path(item) do %>
+                  <%= cl_image_tag item.image.key,
+                    height: 200,
+                    width: 1000,
+                    class: "card-img-top object-fit-cover" %>
+                <% end %>
+              <% end %>
+              <div class="card-body">
+                <%= link_to item.name, item_path(item), class: "text-decoration-none text-dark fw-semibold" %>
+                <p class="card-text"><%= truncate(item.description, length: 80) %></p>
+                <p class="card-text"><strong>Catégorie :</strong> <%= item.category %></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="text-muted">Vous n'avez pas encore mis d'objet en vente.</p>
+    <% end %>
+  </div>
       <% if current_user != @user %>
         <div class="mt-2 form-control me-5">
           <h3>Ajouter un nouveau commentaire</h3>
-          <%= simple_form_for ([@user1, Comment.new(target: @user1)]) do |f| %>
-            <%= f.input :content %>
-            <%= f.input :rating %>
-            <%= f.submit %>
-          <% end %>
+          <%= simple_form_for ([@user, Comment.new(target: @user)]) do |f| %>
+            <div class="form-group">
+              <%= f.label :content, "Commentaire" %>
+              <%= f.text_area :content, class: "form-control", rows: 4 %>
+            </div>
+            <div class="form-group">
+              <%= f.label :rating, "Note" %>
+              <%= f.select :rating, Comment::RATING, {}, class: "form-control" %>
+             </div>
+             <div class="form-actions">
+              <%= f.button :submit, "✨ Soumettre mon avis", class: "btn-submit" %>
+             </div>
+           <% end %>
         </div>
       <% else %>
         <p>Vous ne pouvez pas commenter votre propre profil.</p>

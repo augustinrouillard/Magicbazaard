@@ -1,0 +1,57 @@
+<footer class="footer mt-auto py-5 border-top bg-light text-muted">
+  <div class="container">
+    <div class="row row-cols-2 row-cols-md-4">
+      <div class="col mb-3">
+        <h5>Assistance</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item"><%= link_to "Centre d’aide", "#", class: "nav-link p-0 text-muted" %></li>
+          <li class="nav-item"><%= link_to "Annulations", "#", class: "nav-link p-0 text-muted" %></li>
+          <li class="nav-item"><%= link_to "Sécurité", "#", class: "nav-link p-0 text-muted" %></li>
+          <li class="nav-item"><%= link_to "Conditions générales", "#", class: "nav-link p-0 text-muted" %></li>
+        </ul>
+      </div>
+
+      <div class="col mb-3">
+        <h5>Communauté</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item"><%= link_to "Partage entre sorciers", "#", class: "nav-link p-0 text-muted" %></li>
+          <li class="nav-item"><%= link_to "Inclusivité magique", "#", class: "nav-link p-0 text-muted" %></li>
+          <li class="nav-item"><%= link_to "Contribuer à MagicBazaard", "#", class: "nav-link p-0 text-muted" %></li>
+        </ul>
+      </div>
+
+      <div class="col mb-3">
+        <h5>Location</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item"><%= link_to "Devenir loueur", "#", class: "nav-link p-0 text-muted" %></li>
+          <li class="nav-item"><%= link_to "Nos objets magiques", "#", class: "nav-link p-0 text-muted" %></li>
+          <li class="nav-item"><%= link_to "Guide des artefacts", "#", class: "nav-link p-0 text-muted" %></li>
+        </ul>
+      </div>
+
+      <div class="col mb-3">
+        <h5>À propos</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item"><%= link_to "Notre histoire", "#", class: "nav-link p-0 text-muted" %></li>
+          <li class="nav-item"><%= link_to "Rejoindre l’équipe", "#", class: "nav-link p-0 text-muted" %></li>
+          <li class="nav-item"><%= link_to "Mentions légales", "#", class: "nav-link p-0 text-muted" %></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between pt-4 border-top">
+      <p>&copy; <%= Time.current.year %> MagicBazaard. Tous droits réservés.</p>
+      <div>
+        <%= link_to "#", class: "text-muted me-3" do %>
+          <i class="fab fa-facebook-f"></i>
+        <% end %>
+        <%= link_to "#", class: "text-muted me-3" do %>
+          <i class="fab fa-twitter"></i>
+        <% end %>
+        <%= link_to "#", class: "text-muted" do %>
+          <i class="fab fa-instagram"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</footer>

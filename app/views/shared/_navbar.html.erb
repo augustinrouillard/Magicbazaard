@@ -13,8 +13,8 @@
         <%= text_field_tag :query, params[:query], class: "form-control flex-grow-1", placeholder: "Nom de l'objet" %>
 
         <%= select_tag :category,
-            options_for_select(["bagette", "chaudron", "amulette", "balais", "cape"], params[:category]),
-            class: "form-select", prompt: "Catégorie" %>
+            options_for_select(["Baguette", "Chaudron", "Amulette", "Balais", "Cape"], params[:category]),
+            class: "form-select", placeholder: "Catégorie" %>
 
         <%= button_tag "Search", class: "btn btn-primary" do %>
           <i class="fa-solid fa-magnifying-glass"></i>
@@ -30,7 +30,7 @@
             <% end %>
           </li>
           <li class="nav-item" id="devient-vendeur-btn">
-            <%= link_to "Devient vendeur", new_item_path, class: "nav-btn" %>
+            <%= link_to "J'ai un objet à louer !", new_item_path, class: "nav-btn" %>
           </li>
 
           <li class="nav-item dropdown" id="avatar-image">
