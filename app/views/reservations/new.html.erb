@@ -17,7 +17,7 @@
     <p class="reservation-note">Vous ne serez pas débité maintenant</p>
 
     <div class="total-section">
-      <p>Prix total : <%= @item.price %>€</p>
+      <p>Prix total : <%= @total_price %>€</p>
     </div>
 
     <%= simple_form_for [@item, @reservation] do |f| %>
