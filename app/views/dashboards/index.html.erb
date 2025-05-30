@@ -101,58 +101,105 @@
 
     <!-- Colonne des réservations -->
     <div class="col-md-6">
-      <%# Helper pour afficher les réservations %>
-      <% def render_reservations(reservations, empty_message, show_edit: false) %>
-        <% if reservations.any? %>
-          <div class="row g-4 <%= 'justify-content-center' if reservations.select { |r| r.item.image.attached? }.size == 1 %>">
-            <% reservations.order(starting_date: :asc).each do |reservation| %>
-              <% if reservation.item.image.attached? %>
-                <div class="col-md-6">
-                  <div class="card shadow-sm rounded-5 overflow-hidden h-100">
-                    <%= link_to item_path(reservation.item) do %>
-                      <%= cl_image_tag reservation.item.image.key,
-                        height: 200,
-                        width: 1000,
-                        class: "card-img-top object-fit-cover" %>
-                    <% end %>
-                    <div class="card-body">
-                      <h5 class="card-title mb-1">
-                        <%= link_to reservation.item.name, item_path(reservation.item), class: "text-decoration-none text-dark fw-semibold" %>
-                      </h5>
-                      <p class="card-text mb-2">
-                        Du <%= reservation.starting_date.strftime('%d/%m/%Y') %> au <%= reservation.ending_date.strftime('%d/%m/%Y') %>
-                      </p>
-                      <% if show_edit %>
-                        <%= link_to "Modifier la réservation", edit_reservation_path(reservation), class: "btn btn-primary btn-sm" %>
-                      <% end %>
-                    </div>
-                  </div>
-                </div>
-              <% end %>
-            <% end %>
-          </div>
-        <% else %>
-          <p class="text-muted"><%= empty_message %></p>
-        <% end %>
-      <% end %>
-
       <!-- Réservations passées -->
       <div class="mb-5">
-        <h2 class="fw-semibold mb-4">Mes réservations passées</h2>
-        <%= render_reservations(@reservations.past, "Aucune réservation passée.") %>
+      <h2 class="fw-semibold mb-4">Mes réservations passées</h2>
+      <% if @reservations.past.any? %>
+        <div class="row g-4 <%= 'justify-content-center' if @reservations.past.select { |r| r.item.image.attached? }.size == 1 %>">
+        <% @reservations.past.order(starting_date: :asc).each do |reservation| %>
+          <% if reservation.item.image.attached? %>
+          <div class="col-md-6">
+            <div class="card shadow-sm rounded-5 overflow-hidden h-100">
+            <%= link_to item_path(reservation.item) do %>
+              <%= cl_image_tag reservation.item.image.key,
+              height: 200,
+              width: 1000,
+              class: "card-img-top object-fit-cover" %>
+            <% end %>
+            <div class="card-body">
+              <h5 class="card-title mb-1">
+              <%= link_to reservation.item.name, item_path(reservation.item), class: "text-decoration-none text-dark fw-semibold" %>
+              </h5>
+              <p class="card-text mb-2">
+              Du <%= reservation.starting_date.strftime('%d/%m/%Y') %> au <%= reservation.ending_date.strftime('%d/%m/%Y') %>
+              </p>
+            </div>
+            </div>
+          </div>
+          <% end %>
+        <% end %>
+        </div>
+      <% else %>
+        <p class="text-muted">Aucune réservation passée.</p>
+      <% end %>
       </div>
 
       <!-- Réservations en cours -->
       <div class="mb-5">
-        <h2 class="fw-semibold mb-4">Mes réservations en cours</h2>
-        <%= render_reservations(@reservations.current, "Aucune réservation en cours.") %>
+      <h2 class="fw-semibold mb-4">Mes réservations en cours</h2>
+      <% if @reservations.current.any? %>
+        <div class="row g-4 <%= 'justify-content-center' if @reservations.current.select { |r| r.item.image.attached? }.size == 1 %>">
+        <% @reservations.current.order(starting_date: :asc).each do |reservation| %>
+          <% if reservation.item.image.attached? %>
+          <div class="col-md-6">
+            <div class="card shadow-sm rounded-5 overflow-hidden h-100">
+            <%= link_to item_path(reservation.item) do %>
+              <%= cl_image_tag reservation.item.image.key,
+              height: 200,
+              width: 1000,
+              class: "card-img-top object-fit-cover" %>
+            <% end %>
+            <div class="card-body">
+              <h5 class="card-title mb-1">
+              <%= link_to reservation.item.name, item_path(reservation.item), class: "text-decoration-none text-dark fw-semibold" %>
+              </h5>
+              <p class="card-text mb-2">
+              Du <%= reservation.starting_date.strftime('%d/%m/%Y') %> au <%= reservation.ending_date.strftime('%d/%m/%Y') %>
+              </p>
+            </div>
+            </div>
+          </div>
+          <% end %>
+        <% end %>
+        </div>
+      <% else %>
+        <p class="text-muted">Aucune réservation en cours.</p>
+      <% end %>
       </div>
 
       <!-- Réservations futures -->
       <div class="mb-5">
-        <h2 class="fw-semibold mb-4">Mes réservations à venir</h2>
-        <%= render_reservations(@reservations.upcoming, "Aucune réservation de prévu.", show_edit: true) %>
+      <h2 class="fw-semibold mb-4">Mes réservations à venir</h2>
+      <% if @reservations.upcoming.any? %>
+        <div class="row g-4 <%= 'justify-content-center' if @reservations.upcoming.select { |r| r.item.image.attached? }.size == 1 %>">
+        <% @reservations.upcoming.order(starting_date: :asc).each do |reservation| %>
+          <% if reservation.item.image.attached? %>
+          <div class="col-md-6">
+            <div class="card shadow-sm rounded-5 overflow-hidden h-100">
+            <%= link_to item_path(reservation.item) do %>
+              <%= cl_image_tag reservation.item.image.key,
+              height: 200,
+              width: 1000,
+              class: "card-img-top object-fit-cover" %>
+            <% end %>
+            <div class="card-body">
+              <h5 class="card-title mb-1">
+              <%= link_to reservation.item.name, item_path(reservation.item), class: "text-decoration-none text-dark fw-semibold" %>
+              </h5>
+              <p class="card-text mb-2">
+              Du <%= reservation.starting_date.strftime('%d/%m/%Y') %> au <%= reservation.ending_date.strftime('%d/%m/%Y') %>
+              </p>
+              <%= link_to "Modifier la réservation", edit_reservation_path(reservation), class: "btn btn-primary btn-sm" %>
+            </div>
+            </div>
+          </div>
+          <% end %>
+        <% end %>
+        </div>
+      <% else %>
+        <p class="text-muted">Aucune réservation de prévu.</p>
+      <% end %>
       </div>
     </div>
+    </div>
   </div>
-</div>
