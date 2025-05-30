@@ -49,6 +49,12 @@ body {
   max-width: 1200px;
   margin: auto;
   background-color: white;
+
+  img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
 }
 
 .item-header h1 {

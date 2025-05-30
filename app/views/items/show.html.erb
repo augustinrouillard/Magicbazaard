@@ -58,13 +58,17 @@
             <% total_rating = @item.reviews.sum(:rating) %>
             <% average_rating = total_rating / @item.reviews.count.to_f if @item.reviews.count > 0 %>
           <% end %>
+
         </div>
         <!-- Partie droite : image utilisateur -->
-        <div>
+        <div >
             <% if @item.user.image.present? %>
-            <%= link_to user_profile_path(@item.user), class: "btn btn-primary p-1" do %>
-              <img src="<%= @item.user.image %>" alt="Photo de <%= @item.user.name %>" class="rounded-circle" width="80" height="80">
+
+            <%= link_to user_profile_path(@item.user), class: "text-decoration-none" do %>
+              <img src="<%= @item.user.image %>" alt="Photo de <%= @item.user.name %>" class="rounded-circle" width="50" height="50">
             <% end %>
+            <%= link_to @item.user.name, user_profile_path(@item.user), class: "text-decoration-none", style: "color: black;" %>
+
           <% else %>
             <img src="/assets/default-avatar.png" alt="Avatar par défaut" class="rounded-circle" width="80" height="80">
           <% end %>
@@ -159,6 +163,7 @@
     <p>
       <strong>⚠️ Attention :</strong> Magic Bazaar n’est pas responsable des incidents magiques liés à l’utilisation des objets. Soyez prudent !
     </p>
+
       </div>
     </aside>
      <% if @item.user == current_user %>
